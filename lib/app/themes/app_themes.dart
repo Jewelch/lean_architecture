@@ -9,9 +9,7 @@ final class ThemeCubit extends Cubit<ThemeData> {
 
   /// Toggles the current brightness between light and dark.
   void toggleTheme() => emit(state.brightness == Brightness.dark ? _lightTheme : _darkTheme);
-}
 
-extension _Light on ThemeCubit {
   //? LIGHT THEME
   static final ThemeData _lightTheme = ThemeData(
     applyElevationOverlayColor: true,
@@ -212,10 +210,7 @@ extension _Light on ThemeCubit {
       deleteIconColor: AppColors.primary,
     ),
   );
-}
 
-extension _DarK on ThemeCubit {
-  //& DARK THEME
   static final ThemeData _darkTheme = _lightTheme.copyWith(
     colorScheme: const ColorScheme.dark(
       background: Colors.black54,

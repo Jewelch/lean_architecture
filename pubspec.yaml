@@ -9,7 +9,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
+  
+  flutter_localizations:
+    sdk: flutter
+  
   google_fonts:
 
   lean_requester:
@@ -23,12 +26,15 @@ dependencies:
   path_provider:
   get_it: 
   shared_preferences: 
-  
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
   mocktail:
   flutter_lints:
+
+  build_runner:
 
 flutter:
   uses-material-design: true

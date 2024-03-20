@@ -3,7 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lean_requester/lean_interceptor.dart';
 
 import '../main.dart';
-import '../modules/products/presentation/screen/product_screen.dart';
+import '../modules/product_details/presentation/screen/product_screen.dart';
+import '../modules/products_list/presentation/screen/products_screen.dart';
 import 'themes/app_themes.dart';
 
 class AppWidget extends StatelessWidget {
@@ -19,7 +20,7 @@ class AppWidget extends StatelessWidget {
         builder: (_, theme) {
           return MaterialApp(
             theme: theme,
-            home: const ProductsScreen(),
+            home: true ? ProductsScreen() : ProductDetailsScreen(),
           );
         },
       ),

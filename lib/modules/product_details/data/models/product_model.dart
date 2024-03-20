@@ -11,12 +11,15 @@ final class ProductModel extends Product with DAO {
   List<Object?> get props => [id, title, description, price];
 
   ProductModel({
+    //& DAO
     this.id,
     this.images,
+    this.stock,
+
+    //? DTO
     super.title,
     super.description,
     super.rating,
-    this.stock,
     super.price,
     super.thumbnail,
   });

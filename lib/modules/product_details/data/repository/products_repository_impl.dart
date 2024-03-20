@@ -1,16 +1,16 @@
 import 'package:lean_requester/repository_exp.dart';
 
-import '../../domain/repository/products_repository.dart';
-import '../datasource/products_local_datasource.dart';
-import '../datasource/products_remote_datasource.dart';
+import '../../domain/repository/product_repository.dart';
+import '../datasource/product_local_datasource.dart';
+import '../datasource/product_remote_datasource.dart';
 import '../models/product_model.dart';
 
-final class ProductsRepositoryImpl implements ProductsRepository {
+final class ProductRepositoryImpl implements ProductRepository {
   final ProductRemoteDataSource remoteDataSource;
   final ProductLocalDataSource localDataSource;
   final ConnectivityMonitor connectivityManager;
 
-  const ProductsRepositoryImpl({
+  const ProductRepositoryImpl({
     required this.remoteDataSource,
     required this.localDataSource,
     required this.connectivityManager,
@@ -28,7 +28,7 @@ final class ProductsRepositoryImpl implements ProductsRepository {
       }
     } else {
       try {
-        return Right(await localDataSource.getProduct());
+        return Right(localDataSource.getProduct());
       } catch (exception) {
         return Left(CacheFailure());
       }

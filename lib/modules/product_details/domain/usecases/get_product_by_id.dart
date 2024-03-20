@@ -1,10 +1,10 @@
 import 'package:lean_requester/usecase_exp.dart';
 
 import '../entities/product.dart';
-import '../repository/products_repository.dart';
+import '../repository/product_repository.dart';
 
-final class GetProductByIdUC implements UseCase<Product, Params> {
-  final ProductsRepository productsRepository;
+class GetProductByIdUC implements UseCase<Product, Params> {
+  final ProductRepository productsRepository;
 
   const GetProductByIdUC(this.productsRepository);
 

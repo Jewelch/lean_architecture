@@ -7,7 +7,7 @@ abstract interface class ProductLocalDataSource {
   static const key = 'cachedProductKey';
 
   Future<void> writeToCache(ProductModel product);
-  Future<ProductModel> getProduct();
+  ProductModel getProduct();
 }
 
 final class ProductLocalDataSourceImpl implements ProductLocalDataSource {
@@ -22,10 +22,10 @@ final class ProductLocalDataSourceImpl implements ProductLocalDataSource {
       );
 
   @override
-  Future<ProductModel> getProduct() {
+  ProductModel getProduct() {
     final jsonString = sharedPreferences.getString(ProductLocalDataSource.key);
     if (jsonString != null) {
-      return Future.value(ProductModel.fromJson(jsonDecode(jsonString)));
+      return ProductModel.fromJson(jsonDecode(jsonString));
     } else {
       throw CacheException();
     }

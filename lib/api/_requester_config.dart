@@ -6,9 +6,9 @@ abstract base class _LeanRequesterImpl extends LeanRequester {
   @override
   BaseOptions baseOptions = BaseOptions(
     baseUrl: AppEnvironment.current.baseUrl,
-    connectTimeout: const Duration(milliseconds: 20000),
-    sendTimeout: const Duration(milliseconds: 20000),
-    receiveTimeout: const Duration(milliseconds: 20000),
+    connectTimeout: Duration(milliseconds: AppEnvironment.current.connectTimeout),
+    sendTimeout: Duration(milliseconds: AppEnvironment.current.sendTimeout),
+    receiveTimeout: Duration(milliseconds: AppEnvironment.current.receiveTimeout),
     contentType: ContentType.json.mimeType,
   );
 
@@ -28,13 +28,13 @@ abstract base class _LeanRequesterImpl extends LeanRequester {
   @override
   QueuedInterceptorsWrapper? queuedInterceptorsWrapper = QueuedInterceptorsWrapper(
     onRequest: (options, handler) {
-      Debugger.yellow(options.path.toString());
       handler.next(options);
     },
     onResponse: (response, handler) {
-      Debugger.green(response.requestOptions.path.toString());
       handler.next(response);
     },
-    onError: (error, handler) => handler.next(error),
+    onError: (error, handler) {
+      handler.next(error);
+    },
   );
 }
