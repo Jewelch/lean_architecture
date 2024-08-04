@@ -16,7 +16,7 @@ final class ThemeCubit extends Cubit<ThemeData> {
     useMaterial3: true,
 
     colorScheme: const ColorScheme.light(
-      background: AppColors.scaffold,
+      surface: AppColors.scaffold,
       primary: AppColors.primary,
       secondary: AppColors.secondary,
       shadow: AppColors.shadow,
@@ -161,8 +161,8 @@ final class ThemeCubit extends Cubit<ThemeData> {
 
     //! Checkbox
     checkboxTheme: CheckboxThemeData(
-      checkColor: MaterialStateProperty.all(AppColors.primary),
-      fillColor: MaterialStateProperty.all(AppColors.accent),
+      checkColor: WidgetStateProperty.all(AppColors.primary),
+      fillColor: WidgetStateProperty.all(AppColors.accent),
       side: const BorderSide(color: AppColors.primary),
       shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(AppConstants.checkboxRadius))),
     ),
@@ -213,7 +213,7 @@ final class ThemeCubit extends Cubit<ThemeData> {
 
   static final ThemeData _darkTheme = _lightTheme.copyWith(
     colorScheme: const ColorScheme.dark(
-      background: Colors.black54,
+      surface: Colors.black54,
       primary: Colors.pink,
       secondary: AppColors.secondary,
       shadow: AppColors.shadow,

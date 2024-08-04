@@ -39,7 +39,7 @@ abstract final class AppConstants {
   static bool get elevationAppliedToAppBar => applyElevationToAppBar;
 
   //? AppBar
-  static const double appBarHeight = 130;
+  static const double appBarHeight = 90;
   static const double appBarTopPaddingToSafeArea = 12;
   static const double searchAppBarHeight = 80;
   static const double appBarSymetricHorizontalPadding = bodyMaxSymetricHorizontalPadding;

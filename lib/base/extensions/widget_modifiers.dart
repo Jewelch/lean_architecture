@@ -1,4 +1,4 @@
-import 'dart:ui' show ImageFilter;
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
@@ -6,10 +6,6 @@ import '../../app/index.dart';
 
 //! Extensions on Widget
 extension WidgetModifier on Widget {
-  Transform flipX() => Transform.flip(flipX: true, child: this);
-  Transform flipY() => Transform.flip(flipY: true, child: this);
-  Transform flipXY() => Transform.flip(flipX: true, flipY: true, child: this);
-
   Positioned positioned({
     double? left,
     double? right,
@@ -31,7 +27,6 @@ extension WidgetModifier on Widget {
         },
         child: this,
       );
-
   IgnorePointer ignoreWhen(bool ignoring) => IgnorePointer(
         ignoring: ignoring,
         child: this,
@@ -60,19 +55,34 @@ extension WidgetModifier on Widget {
           child: this);
 
   InkWell onTap(
-    VoidCallback onTap, {
+    VoidCallback? onTap, {
     EdgeInsets padding = EdgeInsets.zero,
-    double radius = AppConstants.defaultRadius,
+    double? radius,
+    Color overlayColor = AppColors.overlayColor,
   }) =>
       InkWell(
-        borderRadius: BorderRadius.circular(radius),
         onTap: onTap,
-        child: Container(padding: padding, child: this),
+        borderRadius: BorderRadius.all(Radius.circular(radius ?? AppConstants.defaultRadius)),
+        overlayColor: WidgetStateProperty.all(overlayColor),
+        splashColor: Colors.red,
+        child: Padding(padding: padding, child: this),
       );
 
-  Padding overallPadding([double value = 16]) => Padding(key: key, padding: EdgeInsets.all(value), child: this);
+  IconButton asIconButton({required VoidCallback onTap}) => IconButton(
+        onPressed: onTap,
+        icon: this,
+      );
+
+  Padding overallPadding([double value = 16]) =>
+      Padding(key: key, padding: EdgeInsets.symmetric(horizontal: value, vertical: value), child: this);
 
   Padding symmetricPadding({double horizontal = 0, double vertical = 0}) => Padding(
+        key: key,
+        padding: EdgeInsets.symmetric(horizontal: horizontal, vertical: vertical),
+        child: this,
+      );
+
+  Padding staticSymmetricPadding({double horizontal = 0, double vertical = 0}) => Padding(
         key: key,
         padding: EdgeInsets.symmetric(horizontal: horizontal, vertical: vertical),
         child: this,
@@ -115,18 +125,6 @@ extension WidgetModifier on Widget {
   }) =>
       ColoredBox(key: key, color: color, child: this);
 
-  Visibility visibleWhenKeyboardIsHidden(BuildContext context) => Visibility(
-        key: key,
-        visible: MediaQuery.viewInsetsOf(context).bottom == 0,
-        child: this,
-      );
-
-  Visibility visibleWhenKeyboardIsShown(BuildContext context) => Visibility(
-        key: key,
-        visible: MediaQuery.viewInsetsOf(context).bottom != 0,
-        child: this,
-      );
-
   Visibility visibleWhen(
     bool visible, {
     Key? key,
@@ -149,6 +147,27 @@ extension WidgetModifier on Widget {
         child: this,
       );
 
+  Visibility invisibleWhen(
+    bool visible, {
+    Key? key,
+    Widget replacement = const SizedBox.shrink(),
+    bool maintainState = false,
+    bool maintainAnimation = false,
+    bool maintainSize = false,
+    bool maintainSemantics = false,
+    bool maintainInteractivity = false,
+  }) =>
+      Visibility(
+        key: key,
+        replacement: replacement,
+        visible: !visible,
+        maintainState: maintainState,
+        maintainAnimation: maintainAnimation,
+        maintainSize: maintainSize,
+        maintainSemantics: maintainSemantics,
+        maintainInteractivity: maintainInteractivity,
+        child: this,
+      );
   Visibility hide({Key? key}) => Visibility(key: key, visible: false, child: this);
 
   SizedBox resize({Key? key, double? width, double? height}) => SizedBox(
@@ -158,7 +177,7 @@ extension WidgetModifier on Widget {
         child: this,
       );
 
-  SizedBox squared({Key? key, double? side}) => SizedBox(
+  SizedBox squared({Key? key, required double side}) => SizedBox(
         key: key,
         width: side,
         height: side,
@@ -204,18 +223,26 @@ extension WidgetModifier on Widget {
       FittedBox(key: key, fit: fit, alignment: alignment, clipBehavior: clipBehavior, child: this);
 
   /// Creates a widget that applies an Blur effect to its child.
-  SizedBox applyBlur({
-    Key? key,
-    double sigmaX = 2.0,
-    double sigmaY = 2.0,
-    TileMode tileMode = TileMode.clamp,
-  }) =>
-      ClipRRect(
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: sigmaX, sigmaY: sigmaY, tileMode: tileMode),
-          child: this,
+  Container applyBlur(
+          {Key? key,
+          double? width,
+          double? height,
+          double sigmaX = 2.0,
+          double sigmaY = 2.0,
+          TileMode tileMode = TileMode.clamp,
+          bool enabled = true,
+          Color? color}) =>
+      Container(
+        width: width ?? double.infinity,
+        height: height,
+        color: color,
+        child: ClipRect(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: sigmaX, sigmaY: sigmaY, tileMode: tileMode),
+            child: this,
+          ),
         ),
-      ).resize(width: double.infinity);
+      );
 
   /// Creates a backdrop filter.
   ///
@@ -275,10 +302,10 @@ extension WidgetModifier on Widget {
   RefreshIndicator onRefresh(
     Future<void> Function() onRefresh, {
     Key? key,
-    double displacement = 40.0,
+    double displacement = 0.0,
     double edgeOffset = 0.0,
     Color? color,
-    Color? backgroundColor,
+    Color? backgroundColor = AppColors.scaffold,
     bool Function(ScrollNotification) notificationPredicate = defaultScrollNotificationPredicate,
     String? semanticsLabel,
     String? semanticsValue,
@@ -289,8 +316,8 @@ extension WidgetModifier on Widget {
         displacement: displacement,
         edgeOffset: edgeOffset,
         onRefresh: onRefresh,
-        color: Colors.white,
-        backgroundColor: AppColors.secondary,
+        color: color,
+        backgroundColor: backgroundColor,
         notificationPredicate: notificationPredicate,
         semanticsLabel: semanticsLabel,
         semanticsValue: semanticsValue,
@@ -298,14 +325,12 @@ extension WidgetModifier on Widget {
         triggerMode: triggerMode,
         child: this,
       );
-
-  /// Allows you to insert widgets inside a CustomScrollView
-  Widget get sliverBox => SliverToBoxAdapter(child: this);
 }
 
 //! Extensions on List<Widget>
 extension WidgetListPadder on List<Widget> {
-  Padding overallPaddding([double value = 16]) => Padding(padding: EdgeInsets.all(value), child: Column(children: this));
+  Padding overallPaddding([double value = 16]) =>
+      Padding(padding: EdgeInsets.symmetric(horizontal: value, vertical: value), child: Column(children: this));
 
   Padding symmetricPadding({double horizontal = 0, double vertical = 0}) => Padding(
         padding: EdgeInsets.symmetric(horizontal: horizontal, vertical: vertical),
@@ -320,27 +345,33 @@ extension WidgetListPadder on List<Widget> {
   }) =>
       Padding(padding: EdgeInsets.fromLTRB(left, top, right, bottom), child: Column(children: this));
 
-  Column wrapWithColumn({
+  Padding symmetricPaddedColumn({
+    double horizontal = 0,
+    double vertical = 0,
     MainAxisSize mainAxisSize = MainAxisSize.max,
     MainAxisAlignment mainAxisAlignment = MainAxisAlignment.start,
     CrossAxisAlignment crossAxisAlignment = CrossAxisAlignment.center,
   }) =>
       Column(
-          mainAxisSize: mainAxisSize,
-          mainAxisAlignment: mainAxisAlignment,
-          crossAxisAlignment: crossAxisAlignment,
-          children: this);
+        mainAxisSize: mainAxisSize,
+        mainAxisAlignment: mainAxisAlignment,
+        crossAxisAlignment: crossAxisAlignment,
+        children: this,
+      ).symmetricPadding(horizontal: horizontal, vertical: vertical);
 
-  Row wrapWithRow({
+  Padding symmetricPaddedRow({
+    double horizontal = 0,
+    double vertical = 0,
     MainAxisSize mainAxisSize = MainAxisSize.max,
     MainAxisAlignment mainAxisAlignment = MainAxisAlignment.start,
     CrossAxisAlignment crossAxisAlignment = CrossAxisAlignment.center,
   }) =>
       Row(
-          mainAxisSize: mainAxisSize,
-          mainAxisAlignment: mainAxisAlignment,
-          crossAxisAlignment: crossAxisAlignment,
-          children: this);
+        mainAxisSize: mainAxisSize,
+        mainAxisAlignment: mainAxisAlignment,
+        crossAxisAlignment: crossAxisAlignment,
+        children: this,
+      ).symmetricPadding(horizontal: horizontal, vertical: vertical);
 }
 
 //! Extension on String

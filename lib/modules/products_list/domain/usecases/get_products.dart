@@ -1,13 +1,23 @@
-import 'package:lean_requester/usecase_exp.dart';
-
+import '../../../../api/data_source.dart';
 import '../../../product_details/domain/entities/product.dart';
-import '../repository/products_repository.dart';
+import '../../data/datasource/products_datasource.dart';
 
 final class GetProductsUC implements UseCase<List<Product>, NoParams> {
-  final ProductsRepository productsRepository;
+  final ProductsDataSource dataSource;
 
-  const GetProductsUC(this.productsRepository);
+  const GetProductsUC(this.dataSource);
 
   @override
-  UsecaseResult<List<Product>?> call(NoParams params) async => await productsRepository.getProducts();
+  UsecaseResult<List<Product>> call(NoParams params) async {
+    try {
+      final products = await dataSource.getProducts();
+      return Right(
+        products.map((product) => Product.from(product)).toList(),
+      );
+    } on CacheException {
+      return Left(CacheFailure());
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
 }

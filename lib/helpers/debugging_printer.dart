@@ -1,8 +1,6 @@
 import 'dart:developer';
 
 class Debugger {
-  static String prefix = '===';
-
   ///------------------------------------
   /// Print to console in black
   ///------------------------------------

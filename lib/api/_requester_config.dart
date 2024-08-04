@@ -1,7 +1,7 @@
 part of "./data_source.dart";
 
 abstract base class _LeanRequesterImpl extends LeanRequester {
-  _LeanRequesterImpl(super.dio);
+  _LeanRequesterImpl(super.dio, super.cacheManager);
 
   @override
   BaseOptions baseOptions = BaseOptions(
@@ -13,7 +13,7 @@ abstract base class _LeanRequesterImpl extends LeanRequester {
   );
 
   @override
-  int mockAwaitDuraitonInMilliseconds = 500;
+  int mockAwaitDuraitonInMilliseconds = 1500;
 
   @override
   bool mockingModeEnabled = false;

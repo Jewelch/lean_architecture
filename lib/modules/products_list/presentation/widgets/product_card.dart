@@ -19,7 +19,7 @@ final class _ProductCard extends StatelessWidget {
               borderOnForeground: false,
               margin: EdgeInsets.zero,
               child: Image.network(
-                product.thumbnail ?? '',
+                product.thumbnail,
                 width: 80,
                 height: 80,
                 fit: BoxFit.cover,
@@ -30,7 +30,7 @@ final class _ProductCard extends StatelessWidget {
               ),
             ),
             title: Text(
-              product.title ?? '',
+              product.title,
               style: AppFonts.helvetica.bold().withSize(14),
             ),
             subtitle: Column(
@@ -44,7 +44,7 @@ final class _ProductCard extends StatelessWidget {
                       color: AppColors.warning,
                     ),
                     Text(
-                      product.rating?.toString() ?? '',
+                      product.rating.toString(),
                       style: AppFonts.helvetica.bold(),
                     ).customPadding(left: 2)
                   ],
@@ -66,7 +66,7 @@ final class _ProductCard extends StatelessWidget {
             ),
           ),
           Text(
-            product.description ?? '',
+            product.description,
             style: AppFonts.helvetica,
           ).customPadding(left: 20, top: 10, bottom: 20),
         ],

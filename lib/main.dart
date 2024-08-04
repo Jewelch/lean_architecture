@@ -13,10 +13,9 @@ part 'main_styling.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await _Dependencies.inject();
+  await _Dependencies.all();
 
-  _Styling.statusBarTransparency();
-  _Styling.allowedDeviceOrientations();
+  _Styling.apply();
 
   runApp(AppWidget());
 }

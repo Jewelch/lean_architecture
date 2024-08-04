@@ -1,6 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lean_requester/managers_exp.dart';
+import 'package:lean_requester/observable.dart';
 
 import '../../../../base/screens/exports.dart';
 import '../../../../main.dart';
@@ -29,25 +31,35 @@ final class ProductsScreen extends StatelessWidget {
           ),
           body: switch (state) {
             Idle() => const SizedBox.shrink(),
-            Loading() => const CircularProgressIndicator().align(),
+            Loading() => const CircularProgressIndicator(strokeWidth: 1).squared(side: 20).center(),
             Error() => Text(state.message),
             Empty() => const SizedBox.shrink(),
             //? Pattern matching
             Success(products: final List<Product> products) => Column(
                 children: [
-                  ...products.map((p) => _ProductCard(p).symmetricPadding(vertical: 20)).toList(),
                   ElevatedButton(
                     child: const Text("Clear"),
                     onPressed: () => context.read<ProductsBloc>().add(ClearProducts()),
-                  ).resize(width: 100, height: 45),
+                  ).resize(width: 100, height: 45).symmetricPadding(vertical: 15),
+                  ListView.builder(
+                    itemCount: products.length,
+                    itemBuilder: (context, index) => _ProductCard(products[index]),
+                  ).expanded(),
                 ],
-              ).customPadding(top: 30),
+              ),
           },
-          floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+          floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
           floatingActionButton: ElevatedButton(
             child: const Text("Get products"),
             onPressed: () => context.read<ProductsBloc>().add(GetProducts(Random().nextInt(20))),
           ).resize(width: 200, height: 45),
+          bottomNavigationBar: Observer(
+              observes: connectivityManager.isConnectedObs,
+              builder: (context, isConnected) => Container(
+                    height: 25,
+                    width: double.infinity,
+                    color: isConnected ? Colors.green : Colors.red,
+                  )),
         ),
       ),
     );

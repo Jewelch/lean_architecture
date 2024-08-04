@@ -1,15 +1,25 @@
-import 'package:lean_requester/usecase_exp.dart';
+import 'package:lean_architecture/modules/product_details/data/models/product_model.dart';
+import 'package:lean_requester/lean_interceptor.dart';
 
+import '../../data/datasource/product_datasource.dart';
 import '../entities/product.dart';
-import '../repository/product_repository.dart';
 
 class GetProductByIdUC implements UseCase<Product, Params> {
-  final ProductRepository productsRepository;
+  final ProductDataSource dataSource;
 
-  const GetProductByIdUC(this.productsRepository);
+  const GetProductByIdUC(this.dataSource);
 
   @override
-  UsecaseResult<Product> call(Params params) async => await productsRepository.getProductById(params.id);
+  UsecaseResult<Product> call(Params params) async {
+    try {
+      final ProductModel product = await dataSource.getProductById(params.id);
+      return Right(Product.from(product));
+    } on CacheException {
+      return Left(CacheFailure());
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
 }
 
 final class Params extends Equatable {

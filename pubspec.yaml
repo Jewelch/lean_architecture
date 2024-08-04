@@ -17,9 +17,7 @@ dependencies:
 
   lean_requester:
     path: ../lean_requester
-    # git:
-    #   url: https://github.com/Jewelch/rides2u_corelabs.git
-    #   ref: main
+ 
 
   uuid:
   flutter_bloc: 8.1.4

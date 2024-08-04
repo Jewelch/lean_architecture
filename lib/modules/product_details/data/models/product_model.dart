@@ -1,30 +1,28 @@
 import 'package:lean_requester/models_exp.dart';
 
-import '../../domain/entities/product.dart';
-
-final class ProductModel extends Product with DAO {
+final class ProductModel implements DAO {
   final int? id;
   final int? stock;
   final List<String>? images;
-
-  @override
-  List<Object?> get props => [id, title, description, price];
+  final String? title;
+  final String? description;
+  final num? rating;
+  final num? price;
+  final String? thumbnail;
 
   ProductModel({
-    //& DAO
     this.id,
     this.images,
     this.stock,
-
-    //? DTO
-    super.title,
-    super.description,
-    super.rating,
-    super.price,
-    super.thumbnail,
+    this.title,
+    this.description,
+    this.rating,
+    this.price,
+    this.thumbnail,
   });
 
-  factory ProductModel.fromJson(json) => ProductModel(
+  @override
+  ProductModel fromJson(json) => ProductModel(
         id: json['id'],
         title: json['title'],
         description: json['description'],
@@ -36,10 +34,7 @@ final class ProductModel extends Product with DAO {
       );
 
   @override
-  ProductModel fromJson(json) => ProductModel.fromJson(json);
-
-  @override
-  Map toJson() => {
+  Map<String, dynamic> toJson() => {
         "id": id,
         "title": title,
         "description": description,

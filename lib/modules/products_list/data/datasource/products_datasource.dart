@@ -1,40 +1,40 @@
 import '../../../../api/data_source.dart';
 import '../../../product_details/data/models/product_model.dart';
 
-abstract interface class ProductsRemoteDataSource {
+abstract interface class ProductsDataSource {
   /// Calls the https://dummyjson.com/products endpoint.
-  ///
-  /// Throws a [ServerException] for all error codes.
-  Future<List<ProductModel>?> getProducts();
+
+  Future<List<ProductModel>> getProducts();
 }
 
-final class ProductsRemoteDataSourceImpl extends LeanRequesterConfig implements ProductsRemoteDataSource {
-  ProductsRemoteDataSourceImpl({required Dio client}) : super(client);
+final class ProductsDataSourceImpl extends LeanRequesterConfig implements ProductsDataSource {
+  ProductsDataSourceImpl({
+    required Dio client,
+    required CacheManager cacheManager,
+    required ConnectivityManager connectivityManager,
+  }) : super(client, cacheManager);
 
   @override
-  Future<List<ProductModel>?> getProducts() async {
-    const bool keyedList = true;
-    try {
-      return (await performDecodingRequest(
-        path: "products",
-        method: RestfullMethods.get,
-        dao: ProductModel(),
-        asList: true,
-        listKey: keyedList ? "products" : null,
-        mockIt: true,
-        mockingData: keyedList ? {"products": productsMap} : productsMap,
-      ) as DaoList<ProductModel>)
-          .list;
-    } catch (_) {
-      throw ServerException();
-    }
+  Future<List<ProductModel>> getProducts() async {
+    return (await performDecodingRequest(
+          // mockingEnabled: true,
+          cachingKey: 'productsKey',
+          path: "products",
+          method: RestfullMethods.get,
+          dao: ProductModel(),
+          asList: true,
+          listKey: "products",
+          // mockingData: false ? {"products": productsMap} : productsMap,
+        ) as DaoList<ProductModel>)
+            .list ??
+        [];
   }
 }
 
 const productsMap = [
   {
     "id": 1,
-    "title": "iPhone 9",
+    "title": "iPhone de Hadil",
     "description": "An apple mobile which is nothing like apple",
     "price": 549,
     "discountPercentage": 12.96,
@@ -42,7 +42,8 @@ const productsMap = [
     "stock": 94,
     "brand": "Apple",
     "category": "smartphones",
-    "thumbnail": "https://cdn.dummyjson.com/product-images/1/thumbnail.jpg",
+    "thumbnail":
+        "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-card-40-iphone15prohero-202309_FMT_WHH?wid=508&hei=472&fmt=p-jpg&qlt=95&.v=1693086369818",
     "images": [
       "https://cdn.dummyjson.com/product-images/1/1.jpg",
       "https://cdn.dummyjson.com/product-images/1/2.jpg",
@@ -61,7 +62,7 @@ const productsMap = [
     "stock": 34,
     "brand": "Apple",
     "category": "smartphones",
-    "thumbnail": "https://cdn.dummyjson.com/product-images/2/thumbnail.jpg",
+    "thumbnail": "https://www.istore.com.tn/4701-medium_default/iphone-14-128-go-blue.jpg",
     "images": [
       "https://cdn.dummyjson.com/product-images/2/1.jpg",
       "https://cdn.dummyjson.com/product-images/2/2.jpg",

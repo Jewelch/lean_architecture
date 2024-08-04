@@ -1,4 +1,4 @@
-import '../../widgets/observable.dart';
+import 'package:lean_requester/observable.dart';
 
 extension ObservableBoolExt on Observable<bool> {
   void enable() => value = true;
