@@ -31,7 +31,7 @@ final class ThemeCubit extends Cubit<ThemeData> {
     appBarTheme: AppBarTheme(
       color: AppColors.greyBackground,
       elevation: AppConstants.topBar.elevation,
-      toolbarHeight: AppConstants.appBarHeight,
+      toolbarHeight: AppConstants.topBar.height,
       shadowColor: AppColors.shadow,
       centerTitle: true,
       iconTheme: const IconThemeData(color: AppColors.primary),
@@ -132,14 +132,14 @@ final class ThemeCubit extends Cubit<ThemeData> {
     ),
 
     //! Card
-    cardTheme: const CardTheme(
+    cardTheme: CardTheme(
       color: AppColors.greyBackground,
       surfaceTintColor: Colors.transparent,
       shadowColor: AppColors.shadow,
-      elevation: AppConstants.cardElevation,
+      elevation: AppConstants.cards.elevation,
       margin: EdgeInsets.zero,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(AppConstants.cardRadius)),
+        borderRadius: BorderRadius.all(Radius.circular(AppConstants.cards.radius)),
       ),
     ),
 
@@ -156,7 +156,7 @@ final class ThemeCubit extends Cubit<ThemeData> {
       style: ListTileStyle.list,
       enableFeedback: true,
       tileColor: Colors.transparent,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppConstants.cardRadius)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppConstants.cards.radius)),
     ),
 
     //! Checkbox
@@ -164,12 +164,12 @@ final class ThemeCubit extends Cubit<ThemeData> {
       checkColor: WidgetStateProperty.all(AppColors.primary),
       fillColor: WidgetStateProperty.all(AppColors.accent),
       side: const BorderSide(color: AppColors.primary),
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(AppConstants.checkboxRadius))),
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5))),
     ),
 
     //! Progress Indicator
-    progressIndicatorTheme: const ProgressIndicatorThemeData(
-      linearMinHeight: AppConstants.linearProgressIndicatorMinHeight,
+    progressIndicatorTheme: ProgressIndicatorThemeData(
+      linearMinHeight: AppConstants.progressIndicators.linearMinHeight,
       color: AppColors.primary,
       linearTrackColor: AppColors.secondary,
       refreshBackgroundColor: AppColors.secondary,

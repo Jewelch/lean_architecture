@@ -1,11 +1,54 @@
 import 'dart:ui';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../../app/index.dart';
 
 //! Extensions on Widget
 extension WidgetModifier on Widget {
+  Visibility materialAppBanner({
+    Key? key,
+    required String message,
+    TextDirection textDirection = TextDirection.ltr,
+    BannerLocation location = BannerLocation.topEnd,
+    TextDirection? layoutDirection,
+    Color color = AppColors.success,
+    TextStyle? textStyle,
+  }) =>
+      Directionality(
+        textDirection: textDirection,
+        child: banner(
+          key: key,
+          message: message,
+          textDirection: textDirection,
+          location: location,
+          color: color,
+          layoutDirection: layoutDirection,
+          textStyle: textStyle,
+        ),
+      ).visibleWhen(!kReleaseMode);
+
+  Banner banner({
+    Key? key,
+    required String message,
+    TextDirection? textDirection,
+    BannerLocation location = BannerLocation.topEnd,
+    TextDirection? layoutDirection,
+    Color color = AppColors.success,
+    TextStyle? textStyle,
+  }) =>
+      Banner(
+        key: key,
+        message: message,
+        textDirection: textDirection,
+        location: location,
+        color: color,
+        layoutDirection: layoutDirection,
+        textStyle: textStyle ?? AppStyles.caption.bold().withColor(Colors.white),
+        child: this,
+      );
+
   Positioned positioned({
     double? left,
     double? right,
@@ -205,9 +248,9 @@ extension WidgetModifier on Widget {
 
   Expanded expanded({Key? key, int flex = 1}) => Expanded(key: key, flex: flex, child: this);
 
-  Align align({
+  Align align(
+    AlignmentGeometry alignment, {
     Key? key,
-    AlignmentGeometry alignment = Alignment.center,
     double? widthFactor,
     double? heightFactor,
   }) =>
@@ -325,6 +368,25 @@ extension WidgetModifier on Widget {
         triggerMode: triggerMode,
         child: this,
       );
+
+  Container decorate({
+    Key? key,
+    double? width,
+    double? height,
+    EdgeInsetsGeometry? padding,
+    EdgeInsetsGeometry? margin,
+    required BoxDecoration decoration,
+    BorderRadiusGeometry? borderRadius,
+  }) =>
+      Container(
+        key: key,
+        width: width,
+        height: height,
+        margin: margin,
+        padding: padding,
+        decoration: decoration,
+        child: this,
+      );
 }
 
 //! Extensions on List<Widget>
@@ -389,5 +451,23 @@ extension CircleAvatarCreator on String {
         foregroundColor: foregroundColor ?? Colors.transparent,
         backgroundImage: NetworkImage(this),
         foregroundImage: (foregroundImage != null) ? NetworkImage(foregroundImage) : null,
+      );
+}
+
+extension TextAligner on Text {
+  Text centerAlign() => Text(
+        data ?? '',
+        key: key,
+        style: style,
+        strutStyle: strutStyle,
+        textAlign: TextAlign.center,
+        textDirection: textDirection,
+        locale: locale,
+        softWrap: softWrap,
+        overflow: overflow,
+        maxLines: maxLines,
+        semanticsLabel: semanticsLabel,
+        textWidthBasis: textWidthBasis,
+        textHeightBehavior: textHeightBehavior,
       );
 }

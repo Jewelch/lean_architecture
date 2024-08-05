@@ -1,4 +1,5 @@
-import '../../helpers/debugging_printer.dart';
+import 'package:cg_core_defs/helpers/debugging_printer.dart';
+
 import 'environments.dart';
 
 abstract final class AppEnvironment {

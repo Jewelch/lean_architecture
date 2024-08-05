@@ -1,21 +1,23 @@
-import '../../base/extensions/di_ext.dart';
+import '../../app_dependencies.dart';
 import 'data/datasource/products_datasource.dart';
 import 'domain/usecases/get_products.dart';
 import 'presentation/bloc/products_bloc.dart';
 
 class ProductsDependencies {
-  static final sl = GetIt.instance;
-
   static void inject() {
     //? Bloc
-    sl.registerFactoryOnce(() => ProductsBloc(sl()));
+    AppDependencies.di.registerFactory(() => ProductsBloc(get()));
 
     //@ Use cases
-    sl.registerLazySingletonOnce(() => GetProductsUC(sl()));
+    AppDependencies.di.registerLazySingleton(() => GetProductsUC(get()));
 
     //$ Data sources
-    sl.registerLazySingletonOnce<ProductsDataSource>(
-      () => ProductsDataSourceImpl(client: sl(), cacheManager: sl(), connectivityManager: sl()),
+    AppDependencies.di.registerLazySingleton<ProductsDataSource>(
+      () => ProductsDataSourceImpl(
+        client: get(),
+        cacheManager: get(),
+        connectivityMonitor: get(),
+      ),
     );
   }
 }

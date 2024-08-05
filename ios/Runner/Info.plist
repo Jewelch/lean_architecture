@@ -45,5 +45,12 @@
 		<true />
 		<key>UIApplicationSupportsIndirectInputEvents</key>
 		<true />
+
+		<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+		<string>We monitor the location of the driver before and during the ride in order to update riders and ensure safety. We also use your location to connect you with on-demand rides more efficiently</string>
+		<key>NSLocationAlwaysUsageDescription</key>
+		<string>We monitor the location of the driver before and during the ride in order to update riders and ensure safety. We also use your location to connect you with on-demand rides more efficiently</string>
+		<key>NSLocationWhenInUseUsageDescription</key>
+		<string>We monitor the location of the driver before and during the ride in order to update riders and ensure safety. We also use your location to connect you with on-demand rides more efficiently</string>
 	</dict>
 </plist>

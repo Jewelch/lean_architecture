@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
 
-import '../colors/app_colors.dart';
 import 'app_fonts.dart';
 import 'font_sizes.dart';
 
 abstract final class AppStyles {
-  static final boldHeadline1 = AppFonts.helvetica.bold().withSize(FontSizes.headline1);
-  static final boldHeadline3 = AppFonts.helvetica.bold().withSize(FontSizes.headline3);
-  static final regularTitle = AppFonts.helvetica.regular().withSize(FontSizes.title).withColor(AppColors.greyBackground);
-  static final regularSubTitle = AppFonts.helvetica.regular().withSize(FontSizes.subtitle).withColor(AppColors.greyRegular);
+  static const _defaultFont = AppFonts.helvetica;
+
+  static final headline1 = _defaultFont.withSize(FontSizes.headline1);
+  static final headline2 = _defaultFont.withSize(FontSizes.headline2);
+  static final headline3 = _defaultFont.withSize(FontSizes.headline3);
+  static final headline4 = _defaultFont.withSize(FontSizes.headline4);
+  static final title = _defaultFont.withSize(FontSizes.title);
+  static final subtitle = _defaultFont.withSize(FontSizes.subtitle);
+  static final indication = _defaultFont.withSize(FontSizes.indication);
+  static final caption = _defaultFont.withSize(FontSizes.caption);
 }
 
 extension TextStyleExt on TextStyle {

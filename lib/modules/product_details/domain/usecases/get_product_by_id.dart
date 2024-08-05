@@ -1,7 +1,7 @@
-import 'package:lean_architecture/modules/product_details/data/models/product_model.dart';
 import 'package:lean_requester/lean_interceptor.dart';
 
 import '../../data/datasource/product_datasource.dart';
+import '../../data/models/product_model.dart';
 import '../entities/product.dart';
 
 class GetProductByIdUC implements UseCase<Product, Params> {

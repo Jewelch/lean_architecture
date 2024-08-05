@@ -3,7 +3,6 @@ import '../../../product_details/data/models/product_model.dart';
 
 abstract interface class ProductsDataSource {
   /// Calls the https://dummyjson.com/products endpoint.
-
   Future<List<ProductModel>> getProducts();
 }
 
@@ -11,8 +10,8 @@ final class ProductsDataSourceImpl extends LeanRequesterConfig implements Produc
   ProductsDataSourceImpl({
     required Dio client,
     required CacheManager cacheManager,
-    required ConnectivityManager connectivityManager,
-  }) : super(client, cacheManager);
+    required ConnectivityMonitor connectivityMonitor,
+  }) : super(client, cacheManager, connectivityMonitor);
 
   @override
   Future<List<ProductModel>> getProducts() async {
@@ -24,7 +23,7 @@ final class ProductsDataSourceImpl extends LeanRequesterConfig implements Produc
           dao: ProductModel(),
           asList: true,
           listKey: "products",
-          // mockingData: false ? {"products": productsMap} : productsMap,
+          mockingData: true ? {"products": productsMap} : productsMap,
         ) as DaoList<ProductModel>)
             .list ??
         [];

@@ -1,10 +1,5 @@
 import 'dart:math';
 
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
-import 'package:lean_architecture/api/data_source.dart';
-import 'package:lean_requester/observable.dart';
-
 import '../../../../base/screens/exports.dart';
 import '../../domain/entities/product.dart';
 import '../../injections.dart';
@@ -22,13 +17,12 @@ final class ProductDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<ProductDetailsBlocImpl>(
-      create: (_) => GetIt.instance<ProductDetailsBlocImpl>(),
+      create: (_) => get<ProductDetailsBlocImpl>(),
       child: BlocConsumer<ProductDetailsBlocImpl, ProductState>(
         listener: (context, state) {},
-        builder: (context, state) => Scaffold(
-          appBar: AppBar(
-            title: const Text('Product details'),
-          ),
+        builder: (context, state) => SmartScaffold(
+          bottomBarParent: BottomBarParents.recharge,
+          title: 'Product details',
           body: switch (state) {
             Idle() => const Text("Idle").center(),
             Loading() => const CircularProgressIndicator(strokeWidth: 1).squared(side: 20).center(),
@@ -50,13 +44,6 @@ final class ProductDetailsScreen extends StatelessWidget {
             child: const Text("Get product"),
             onPressed: () => context.read<ProductDetailsBlocImpl>().add(GetProduct(Random().nextInt(20))),
           ).resize(width: 200, height: 45),
-          bottomNavigationBar: Observer(
-              observes: connectivityManager.isConnectedObs,
-              builder: (context, isConnected) => Container(
-                    height: 25,
-                    width: double.infinity,
-                    color: isConnected ? Colors.green : Colors.red,
-                  )),
         ),
       ),
     );

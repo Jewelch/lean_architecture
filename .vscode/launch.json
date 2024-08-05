@@ -1,11 +1,122 @@
 {
-    "version": "0.2.0",
     "configurations": [
         {
-            "name": "lean_architecture",
+            "name": "Get_it-SP",
+            "program": "lib/main.dart",
             "request": "launch",
-            "type": "dart",
-            "program": "lib/main.dart"
+            "toolArgs": [
+                "--dart-define",
+                "DependencyContainer=get_it",
+                "--dart-define",
+                "CacheManager=shar_pref",
+                "--dart-define",
+                "connectivityMonitor=connectivity_plus",
+                "--dart-define",
+                "locationManager=geo_locator",
+            ],
+            "type": "dart"
+        },
+        {
+            "name": "Get_it-GS",
+            "program": "lib/main.dart",
+            "request": "launch",
+            "toolArgs": [
+                "--dart-define",
+                "DependencyContainer=get_it",
+                "--dart-define",
+                "CacheManager=get_storage",
+                "--dart-define",
+                "connectivityMonitor=connectivity_plus",
+                "--dart-define",
+                "locationManager=geo_locator",
+            ],
+            "type": "dart"
+        },
+        {
+            "name": "Kiwi-SP",
+            "program": "lib/main.dart",
+            "request": "launch",
+            "toolArgs": [
+                "--dart-define",
+                "DependencyContainer=kiwi",
+                "--dart-define",
+                "CacheManager=shar_pref",
+                "--dart-define",
+                "connectivityMonitor=connectivity_plus",
+                "--dart-define",
+                "locationManager=geo_locator",
+            ],
+            "type": "dart"
+        },
+        {
+            "name": "Kiwi-GS",
+            "program": "lib/main.dart",
+            "request": "launch",
+            "toolArgs": [
+                "--dart-define",
+                "DependencyContainer=kiwi",
+                "--dart-define",
+                "CacheManager=get_storage",
+                "--dart-define",
+                "connectivityMonitor=connectivity_plus",
+                "--dart-define",
+                "locationManager=geo_locator",
+            ],
+            "type": "dart"
+        },
+        {
+            "name": "Geo Locator",
+            "program": "lib/main.dart",
+            "request": "launch",
+            "toolArgs": [
+                "--dart-define",
+                "DependencyContainer=get_it",
+                "--dart-define",
+                "CacheManager=get_storage",
+                "--dart-define",
+                "connectivityMonitor=connectivity_plus",
+                "--dart-define",
+                "locationManager=geo_locator",
+            ],
+            "type": "dart"
+        },
+        {
+            "name": "Location",
+            "program": "lib/main.dart",
+            "request": "launch",
+            "toolArgs": [
+                "--dart-define",
+                "DependencyContainer=get_it",
+                "--dart-define",
+                "CacheManager=get_storage",
+                "--dart-define",
+                "connectivityMonitor=connectivity_plus",
+                "--dart-define",
+                "locationManager=location",
+            ],
+            "type": "dart"
+        },
+        {
+            "name": "Flutter Netw Connectivity",
+            "program": "lib/main.dart",
+            "request": "launch",
+            "toolArgs": [
+                "--dart-define",
+                "DependencyContainer=get_it",
+                "--dart-define",
+                "CacheManager=get_storage",
+                "--dart-define",
+                "connectivityMonitor=flut_netw_connectivity"
+            ],
+            "type": "dart"
+        },
+        {
+            "flutterMode": "debug",
+            "name": "CacheManager Not Provided",
+            "program": "lib/main.dart",
+            "request": "launch",
+            "type": "dart"
         }
-    ]
+    ],
+    "version": "0.2.0"
 }

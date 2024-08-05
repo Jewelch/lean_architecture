@@ -1,3 +1,5 @@
+import 'package:cg_core_defs/cg_core_defs.dart';
+
 import '../../../../api/data_source.dart';
 import '../models/product_model.dart';
 
@@ -10,7 +12,8 @@ final class ProductRemoteDataSourceImpl extends LeanRequesterConfig implements P
   ProductRemoteDataSourceImpl({
     required Dio client,
     required CacheManager cacheManager,
-  }) : super(client, cacheManager);
+    required ConnectivityMonitor connectivityMonitor,
+  }) : super(client, cacheManager, connectivityMonitor);
 
   @override
   DatasourceResult<ProductModel> getProductById(int id) async => await performDecodingRequest(
