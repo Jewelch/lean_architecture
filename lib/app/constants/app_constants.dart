@@ -115,7 +115,7 @@ class _TopBar {
 
   final double radius = 0;
   final double height = 130;
-  final double elevation = 10;
+  final double elevation = 3;
   final double leadingWidth = 60;
   final double buttonWidth = 60;
 }

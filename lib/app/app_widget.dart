@@ -1,3 +1,5 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
+
 import '../base/screens/exports.dart';
 import '../modules/index.dart';
 
@@ -12,7 +14,7 @@ class AppWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => ThemeCubit(),
+      create: (_) => get<ThemeCubit>(),
       child: BlocBuilder<ThemeCubit, ThemeData>(
         builder: (_, theme) {
           return MaterialApp(
@@ -24,9 +26,10 @@ class AppWidget extends StatelessWidget {
                 children: [
                   Expanded(
                     child: [
-                      LocationScreen(),
-                      ProductsScreen(),
                       ProductDetailsScreen(),
+                      ProductsScreen(),
+                      LocationScreen(),
+                      const ProfileScreen(),
                     ][1],
                   ),
                   const _ConnectivityWidget(),
@@ -36,12 +39,12 @@ class AppWidget extends StatelessWidget {
           )
               .materialAppBanner(
                 color: AppColors.error,
-                message: AppDependencies.dependencyContainerEnvValue,
+                message: AppInjections.dependencyContainerEnvValue,
                 location: BannerLocation.topStart,
               )
               .materialAppBanner(
                 color: AppColors.warning,
-                message: AppDependencies.cacheManagerEnvValue,
+                message: AppInjections.cacheManagerEnvValue,
                 location: BannerLocation.topEnd,
               );
         },
@@ -54,22 +57,24 @@ class _ConnectivityWidget extends StatelessWidget {
   const _ConnectivityWidget();
 
   @override
-  @override
   Widget build(BuildContext context) {
     return Observer(
-      observes: get<ConnectivityMonitor>().isConnectedObs,
-      builder: (context, isConnected) => Container(
-          height: 20,
-          width: double.infinity,
-          color: isConnected ? AppColors.success : AppColors.error,
-          child: Column(
-            children: [
-              Text(
-                get<ConnectivityMonitor>().runtimeType.toString(),
-                style: AppStyles.caption.bold().withColor(AppColors.primary),
-              ).align(Alignment.centerLeft).customPadding(left: 35, top: 3),
-            ],
-          )),
-    );
+        observes: get<ConnectivityMonitor>().isConnectedObs,
+        builder: (context, isConnected) => Container(
+              height: 35,
+              width: double.infinity,
+              color: isConnected ? AppColors.success : AppColors.error,
+              child: AnimatedTextKit(
+                animatedTexts: [
+                  WavyAnimatedText(
+                    get<ConnectivityMonitor>().runtimeType.toString(),
+                    textAlign: TextAlign.center,
+                    textStyle: AppStyles.caption.bold(),
+                  ),
+                ],
+                repeatForever: true,
+                pause: const Duration(seconds: 5),
+              ).align(Alignment.bottomCenter).customPadding(bottom: 14),
+            ));
   }
 }

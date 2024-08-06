@@ -1,6 +1,6 @@
 part of '../scaffold/smart_scaffold.dart';
 
-enum BottomBarParents { none, recharge, history, profile }
+enum BottomBarParents { none, product, list, location, profile }
 
 final class _BottomBar extends StatelessWidget {
   const _BottomBar(this.bottomBarParents);
@@ -11,11 +11,10 @@ final class _BottomBar extends StatelessWidget {
   Widget build(BuildContext context) => switch (bottomBarParents) {
         BottomBarParents.none => const SizedBox.shrink(),
         _ => Card(
-            elevation: 10,
+            elevation: AppConstants.bottomBar.elevation - 5,
             color: AppColors.greyBackground,
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: _homeChildren
                   .map(
                     (module) => IconButton(
@@ -50,9 +49,10 @@ final class _BottomBar extends StatelessWidget {
       };
 
   Color _color(index) => switch (bottomBarParents) {
-            BottomBarParents.recharge => 0,
-            BottomBarParents.history => 1,
-            BottomBarParents.profile => 2,
+            BottomBarParents.product => 0,
+            BottomBarParents.list => 1,
+            BottomBarParents.location => 2,
+            BottomBarParents.profile => 3,
             BottomBarParents.none => -1,
           } ==
           index
@@ -80,13 +80,7 @@ final List<_PageModel> _homeChildren = [
     onPressed: () {},
   ),
   _PageModel(
-    index: 2,
-    title: 'Navigator',
-    iconOrImage: const Left(Icons.navigation),
-    onPressed: () {},
-  ),
-  _PageModel(
-    index: 2,
+    index: 3,
     title: 'Profile',
     iconOrImage: const Left(Icons.person),
     onPressed: () {},

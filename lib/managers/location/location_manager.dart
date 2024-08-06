@@ -86,7 +86,7 @@ class Notifier {
       backgroundColor: AppColors.greyDark,
       content: Text(
         "Location permission is required to use this app.",
-        style: AppStyles.subtitle.withColor(AppColors.scaffold),
+        style: AppStyles.subtitle,
       ),
       behavior: SnackBarBehavior.floating,
       duration: const Duration(milliseconds: 1500),

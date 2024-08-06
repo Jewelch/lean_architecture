@@ -1,7 +1,8 @@
-part of '../screen/product_screen.dart';
+import '../base/screens/exports.dart';
+import '../modules/product_details/domain/entities/product.dart';
 
-final class _ProductCard extends StatelessWidget {
-  const _ProductCard(this.product);
+final class ProductCard extends StatelessWidget {
+  const ProductCard(this.product);
 
   final Product product;
 
@@ -31,7 +32,7 @@ final class _ProductCard extends StatelessWidget {
             ),
             title: Text(
               product.title,
-              style: AppFonts.helvetica.bold().withSize(14),
+              style: AppStyles.subtitle.bold().dark(),
             ),
             subtitle: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -45,7 +46,7 @@ final class _ProductCard extends StatelessWidget {
                     ),
                     Text(
                       product.rating.toString(),
-                      style: AppFonts.helvetica.bold(),
+                      style: AppFonts.helvetica.bold().dark(),
                     ).customPadding(left: 2)
                   ],
                 ),
@@ -58,7 +59,7 @@ final class _ProductCard extends StatelessWidget {
                     ),
                     Text(
                       "${product.price}\$",
-                      style: AppFonts.helvetica.bold(),
+                      style: AppFonts.helvetica.bold().dark(),
                     ).customPadding(left: 2),
                   ],
                 ),
@@ -67,7 +68,7 @@ final class _ProductCard extends StatelessWidget {
           ),
           Text(
             product.description,
-            style: AppFonts.helvetica,
+            style: AppFonts.helvetica.dark(),
           ).customPadding(left: 20, top: 10, bottom: 20),
         ],
       ),

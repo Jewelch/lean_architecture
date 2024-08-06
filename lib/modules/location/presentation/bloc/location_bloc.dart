@@ -33,7 +33,7 @@ final class LocationBlocImpl extends LocationBloc {
   }
 
   @override
-  openAppSettings<T extends LocationEvent>(T event, Emitter<LocationStates> emit) async {
+  openAppSettings<T extends LocationEvent>(T event, Emitter<LocationStates> emit) {
     locationManager.openAppSettings();
   }
 }

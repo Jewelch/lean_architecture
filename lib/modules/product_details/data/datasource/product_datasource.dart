@@ -1,5 +1,3 @@
-import 'package:cg_core_defs/cg_core_defs.dart';
-
 import '../../../../api/data_source.dart';
 import '../models/product_model.dart';
 

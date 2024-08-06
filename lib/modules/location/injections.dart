@@ -1,4 +1,4 @@
-import '../../app_dependencies.dart';
+import '../../app_injections.dart';
 import '../../managers/location/geo_locator.dart';
 import '../../managers/location/location.dart';
 import '../../managers/location/location_manager.dart';
@@ -9,10 +9,10 @@ class LocationScreenDependencies {
 
   static void inject() {
     //? Bloc
-    AppDependencies.di.registerFactory(() => LocationBlocImpl());
+    AppInjections.di.registerFactory(() => LocationBlocImpl());
 
     //= Location Manager
-    AppDependencies.di.registerLazySingleton(
+    AppInjections.di.registerLazySingleton(
       () => LocationManager(
         locationManagerEnvValue == "geo_locator" ? GeolocatorStrategy() : LocationStrategy(),
       ),

@@ -7,7 +7,6 @@ abstract final class AppFonts {
 
   static const TextStyle helvetica = TextStyle(
     fontFamily: "Helvetica",
-    color: AppColors.primary,
-    fontWeight: FontWeight.w400,
+    color: AppColors.scaffold,
   );
 }

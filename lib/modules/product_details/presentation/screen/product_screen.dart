@@ -1,13 +1,10 @@
 import 'dart:math';
 
 import '../../../../base/screens/exports.dart';
-import '../../domain/entities/product.dart';
 import '../../injections.dart';
 import '../bloc/product_bloc.dart';
 import '../bloc/product_events.dart';
 import '../bloc/product_states.dart';
-
-part '../widgets/product_card.dart';
 
 final class ProductDetailsScreen extends StatelessWidget {
   ProductDetailsScreen({super.key}) {
@@ -21,7 +18,7 @@ final class ProductDetailsScreen extends StatelessWidget {
       child: BlocConsumer<ProductDetailsBlocImpl, ProductState>(
         listener: (context, state) {},
         builder: (context, state) => SmartScaffold(
-          bottomBarParent: BottomBarParents.recharge,
+          bottomBarParent: BottomBarParents.product,
           title: 'Product details',
           body: switch (state) {
             Idle() => const Text("Idle").center(),
@@ -31,7 +28,7 @@ final class ProductDetailsScreen extends StatelessWidget {
             //? Pattern matching
             Success(product: final product) => Column(
                 children: [
-                  _ProductCard(product).customPadding(bottom: 20, top: 50),
+                  ProductCard(product).customPadding(bottom: 20, top: 50),
                   ElevatedButton(
                     child: const Text("Clear"),
                     onPressed: () => context.read<ProductDetailsBlocImpl>().add(ClearProduct()),

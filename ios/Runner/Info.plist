@@ -52,5 +52,18 @@
 		<string>We monitor the location of the driver before and during the ride in order to update riders and ensure safety. We also use your location to connect you with on-demand rides more efficiently</string>
 		<key>NSLocationWhenInUseUsageDescription</key>
 		<string>We monitor the location of the driver before and during the ride in order to update riders and ensure safety. We also use your location to connect you with on-demand rides more efficiently</string>
+		 	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string></string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>yourScheme</string>
+			</array>
+		</dict>
+	</array>
+	<key>FlutterDeepLinkingEnabled</key>
+    <true/>
 	</dict>
 </plist>

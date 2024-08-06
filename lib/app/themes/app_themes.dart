@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../index.dart';
 
@@ -35,7 +34,7 @@ final class ThemeCubit extends Cubit<ThemeData> {
       shadowColor: AppColors.shadow,
       centerTitle: true,
       iconTheme: const IconThemeData(color: AppColors.primary),
-      titleTextStyle: AppFonts.helvetica.semiBold().withSize(FontSizes.headline2),
+      titleTextStyle: AppFonts.nunito.semiBold().withSize(FontSizes.headline2).withColor(AppColors.greyRegular),
     ),
 
     //$ Elevated Button
@@ -219,11 +218,11 @@ final class ThemeCubit extends Cubit<ThemeData> {
       shadow: AppColors.shadow,
     ),
     scaffoldBackgroundColor: Colors.black45,
-    textTheme: GoogleFonts.interTextTheme(),
+    textTheme: const TextTheme(),
     appBarTheme: _lightTheme.appBarTheme.copyWith(
       color: AppColors.primary,
-      titleTextStyle: _lightTheme.appBarTheme.titleTextStyle?.copyWith(color: AppColors.scaffold),
-      iconTheme: _lightTheme.appBarTheme.iconTheme?.copyWith(color: AppColors.scaffold),
+      titleTextStyle: _lightTheme.appBarTheme.titleTextStyle,
+      iconTheme: _lightTheme.appBarTheme.iconTheme,
     ),
   );
 }

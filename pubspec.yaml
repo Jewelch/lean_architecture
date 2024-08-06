@@ -13,8 +13,6 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   
-  google_fonts:
-
   lean_requester:
     path: ../lean_requester
 
@@ -24,9 +22,12 @@ dependencies:
   cg_core_defs:
     path: ../cg_core_defs
 
-  uuid:
   flutter_bloc: 8.1.4
-  path_provider:
+  animated_text_kit: ^4.2.2
+
+  # Routing system
+  go_router: ^14.2.2
+  auto_route: ^9.2.0
 
   # Connectivity Monitors
   connectivity_plus: ^6.0.4

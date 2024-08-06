@@ -2,7 +2,7 @@ import 'package:cg_core_defs/cg_core_defs.dart';
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../app_dependencies.dart';
+import '../../app_injections.dart';
 
 @immutable
 class SharedPrefs implements CacheManager<SharedPreferences> {

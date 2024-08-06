@@ -2,7 +2,7 @@ import 'package:cg_core_defs/cg_core_defs.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get_storage/get_storage.dart';
 
-import '../../app_dependencies.dart';
+import '../../app_injections.dart';
 
 @immutable
 class GetStore implements CacheManager<GetStorage> {

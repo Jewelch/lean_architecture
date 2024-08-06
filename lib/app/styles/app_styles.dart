@@ -1,7 +1,4 @@
-import 'package:flutter/material.dart';
-
-import 'app_fonts.dart';
-import 'font_sizes.dart';
+import 'package:lean_architecture/base/screens/exports.dart';
 
 abstract final class AppStyles {
   static const _defaultFont = AppFonts.helvetica;
@@ -31,4 +28,10 @@ extension TextStyleExt on TextStyle {
   TextStyle withColor(Color color) => copyWith(color: color);
   TextStyle withHeight(double height) => copyWith(height: height);
   TextStyle italic() => copyWith(fontStyle: FontStyle.italic);
+
+  TextStyle white() => copyWith(color: Colors.white);
+  TextStyle dark() => copyWith(color: AppColors.black);
+  TextStyle primary() => copyWith(color: AppColors.primary);
+  TextStyle secondary() => copyWith(color: AppColors.secondary);
+  TextStyle accent() => copyWith(color: AppColors.accent);
 }

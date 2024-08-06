@@ -1,7 +1,6 @@
 import 'package:lean_requester/lean_interceptor.dart';
 
 import '../../base/screens/exports.dart';
-import '../../modules/product_details/domain/entities/product.dart';
 import '../top_bar/top_bar.dart';
 
 part '../bottom_bar/bottom_bar.dart';
@@ -97,7 +96,7 @@ class SmartScaffold extends StatelessWidget {
                   displayBack: displayBack,
                   displayMenu: displayMenu,
                   displayClose: displayClose,
-                  title: title.safe(),
+                  title: title ?? "",
                   titleColor: tilteColor,
                   titleStyle: titleStyle,
                   titleWidget: titleWidget,

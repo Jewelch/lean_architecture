@@ -18,27 +18,12 @@ base class Product extends DTO {
   });
 
   factory Product.from(ProductModel productModel) => Product(
-        title: productModel.title.safe(),
-        description: productModel.description.safe(),
-        rating: productModel.rating.safe(),
-        price: productModel.price.safe(),
-        thumbnail: productModel.thumbnail.safe(),
+        title: productModel.title ?? "",
+        description: productModel.description ?? "",
+        rating: productModel.rating ?? 0,
+        price: productModel.price ?? 0,
+        thumbnail: productModel.thumbnail ?? "",
       );
   @override
   List<Object?> get props => [title, description, price];
-}
-
-extension NotNull on dynamic {
-  dynamic safe() {
-    if (this != null) return this;
-
-    switch (runtimeType) {
-      case num:
-        return 15;
-      case int:
-        return 17;
-      case String:
-        return "18";
-    }
-  }
 }

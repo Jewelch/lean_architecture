@@ -8,7 +8,7 @@ part 'main_styling.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await AppDependencies.all();
+  await AppInjections.all();
 
   _Styling.apply();
 

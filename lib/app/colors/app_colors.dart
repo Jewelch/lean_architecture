@@ -19,6 +19,7 @@ abstract final class AppColors {
   static const Color bottomBarDarkColor = Color.fromRGBO(6, 48, 72, 1);
 
   static const Color scaffold = Colors.white;
+  static const Color black = Colors.black;
 
   static const Color splashColor = Color(0x1A6DADF0);
   static const Color focusColor = Color(0x1AFC5656);
@@ -30,7 +31,7 @@ abstract final class AppColors {
 
   static const Color error = Color(0xFFF20000);
   static const Color warning = Color(0xFFD3A02A);
-  static const Color success = Color.fromRGBO(120, 195, 84, 1);
+  static const Color success = Colors.green;
 
   static const Color transparent = Colors.transparent;
 }
