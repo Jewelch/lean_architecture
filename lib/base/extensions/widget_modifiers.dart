@@ -61,7 +61,8 @@ extension WidgetModifier on Widget {
     double? width,
     double? height,
   }) =>
-      Positioned(left: left, right: right, top: top, bottom: bottom, width: width, height: height, child: this);
+      Positioned(
+          left: left, right: right, top: top, bottom: bottom, width: width, height: height, child: this);
 
   PopScope captureScopePopping(
     void Function(bool value)? onPopInvoked, {
@@ -69,7 +70,7 @@ extension WidgetModifier on Widget {
   }) =>
       PopScope(
         canPop: canPop,
-        onPopInvoked: (value) {
+        onPopInvokedWithResult: (value, _) {
           onPopInvoked?.call(value);
         },
         child: this,
@@ -166,7 +167,9 @@ extension WidgetModifier on Widget {
     double? widthFactor,
     double? heightFactor,
   }) =>
-      enabled ? Center(key: key, widthFactor: widthFactor, heightFactor: heightFactor, child: this) : this;
+      enabled
+          ? Center(key: key, widthFactor: widthFactor, heightFactor: heightFactor, child: this)
+          : this;
 
   ColoredBox coloredBox({
     Key? key,
@@ -271,7 +274,8 @@ extension WidgetModifier on Widget {
         child: this,
       );
 
-  @Deprecated('Opacity is an expensive operation, as is clipping and should be avoided as much as possible,')
+  @Deprecated(
+      'Opacity is an expensive operation, as is clipping and should be avoided as much as possible,')
 
   /// ## Performance considerations for opacity animation
   ///
@@ -316,7 +320,12 @@ extension WidgetModifier on Widget {
     double? widthFactor,
     double? heightFactor,
   }) =>
-      Align(key: key, alignment: alignment, widthFactor: widthFactor, heightFactor: heightFactor, child: this);
+      Align(
+          key: key,
+          alignment: alignment,
+          widthFactor: widthFactor,
+          heightFactor: heightFactor,
+          child: this);
 
   /// Creates a widget that scales and positions its child within itself according to [fit].
   FittedBox makeFitted({

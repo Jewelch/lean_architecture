@@ -4,6 +4,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 
 import '../base/screens/exports.dart';
 import '../modules/index.dart';
+import '../modules/product_details_enum/presentation/screen/product_screen.dart';
 
 class AppWidget extends StatelessWidget {
   static final navigatorKey = GlobalKey<NavigatorState>();
@@ -44,10 +45,11 @@ class AppWidget extends StatelessWidget {
                   Expanded(
                     child: [
                       ProductDetailsScreen(),
+                      ProductDetailsScreenEnum(),
                       ProductsScreen(),
                       LocationScreen(),
                       const ProfileScreen(),
-                    ][0],
+                    ][1],
                   ),
                   const _ConnectivityWidget(),
                 ],
@@ -75,8 +77,10 @@ class _ConnectivityWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final connectivityMonitor = get<ConnectivityMonitor>();
+
     return Observer(
-        observes: get<ConnectivityMonitor>().isConnectedObs,
+        observes: connectivityMonitor.isConnectedObs,
         builder: (context, isConnected) => Container(
               height: 35,
               width: double.infinity,
@@ -84,7 +88,7 @@ class _ConnectivityWidget extends StatelessWidget {
               child: AnimatedTextKit(
                 animatedTexts: [
                   WavyAnimatedText(
-                    get<ConnectivityMonitor>().runtimeType.toString(),
+                    connectivityMonitor.runtimeType.toString(),
                     textAlign: TextAlign.center,
                     textStyle: AppStyles.caption.bold(),
                   ),

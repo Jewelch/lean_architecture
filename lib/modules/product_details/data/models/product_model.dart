@@ -3,7 +3,6 @@ import 'package:lean_requester/models_exp.dart';
 final class ProductModel implements DAO {
   final int? id;
   final int? stock;
-  final List<String>? images;
   final String? title;
   final String? description;
   final num? rating;
@@ -12,7 +11,6 @@ final class ProductModel implements DAO {
 
   ProductModel({
     this.id,
-    this.images,
     this.stock,
     this.title,
     this.description,
@@ -23,14 +21,13 @@ final class ProductModel implements DAO {
 
   @override
   ProductModel fromJson(json) => ProductModel(
-        id: json['id'],
-        title: json['title'],
-        description: json['description'],
-        rating: json['rating'],
-        stock: json['stock'],
-        price: json['price'],
-        thumbnail: json['thumbnail'],
-        images: (json['images'] as List<dynamic>).map((e) => e.toString()).toList(),
+        id: json?['id'],
+        title: json?['title'],
+        description: json?['description'],
+        rating: json?['rating'],
+        stock: json?['stock'],
+        price: json?['price'],
+        thumbnail: json?['thumbnail'],
       );
 
   @override
@@ -42,6 +39,5 @@ final class ProductModel implements DAO {
         "stock": stock,
         "price": price,
         "thumbnail": thumbnail,
-        "images": images,
       };
 }

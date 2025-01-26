@@ -12,10 +12,8 @@ class ConnectivityPlus extends ConnectivityMonitor {
 
   @override
   void startMonitoring() {
-    // super.startMonitoring();
-
+    super.startMonitoring();
     _connectivity.onConnectivityChanged.listen((connectivityResult) {
-      Debugger.green("$connectivityResult");
       isConnectedObs.value = !connectivityResult.contains(ConnectivityResult.none);
     });
   }

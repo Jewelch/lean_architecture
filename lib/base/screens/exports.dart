@@ -9,4 +9,4 @@ export '../../app_injections.dart';
 export '../../widgets/index.dart';
 export '../../widgets/scaffold/smart_scaffold.dart';
 export '../extensions/widget_modifiers.dart';
-export './base_screen.dart';
+export 'bloc_lifecycle_widget.dart';

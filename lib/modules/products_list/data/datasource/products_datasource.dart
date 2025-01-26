@@ -23,13 +23,13 @@ final class ProductsDataSourceImpl extends LeanRequesterConfig implements Produc
         dao: ProductModel(),
         asList: true,
         listKey: "products",
-        mockingData: true ? {"products": productsMap} : productsMap,
+        mockingData: true ? {"products": productList} : productList,
       ) as DaoList<ProductModel>)
           .list ??
       [];
 }
 
-const productsMap = [
+const productList = [
   {
     "id": 1,
     "title": "iPhone de Hadil",

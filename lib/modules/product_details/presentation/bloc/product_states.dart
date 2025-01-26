@@ -30,5 +30,3 @@ final class Error extends ProductState {
   @override
   List<Object> get props => [message];
 }
-
-// enum ProductStateEnum { idle, loading, empty, success, error }

@@ -3,7 +3,9 @@ import 'package:flutter/widgets.dart' show WidgetsBinding, mustCallSuper;
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 abstract class BaseBloc<E, S> extends Bloc<E, S> {
-  BaseBloc(super.initialState);
+  BaseBloc(super.initialState) {
+    onInit();
+  }
 
   @mustCallSuper
   void onInit() {

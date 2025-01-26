@@ -25,7 +25,7 @@ class GetProductByIdUC implements UseCase<Product, Params> {
 }
 
 final class Params extends Equatable {
-  final int id;
+  final String id;
 
   const Params({required this.id});
 

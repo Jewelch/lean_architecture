@@ -24,6 +24,7 @@ base class Product extends DTO {
         price: productModel.price ?? 0,
         thumbnail: productModel.thumbnail ?? "",
       );
+
   @override
   List<Object?> get props => [title, description, price];
 }
