@@ -16,7 +16,7 @@ This repository presents an alternative approach to software architecture that a
 
 To get started with Lean Architecture, follow these steps:
 
-1. **Clone the Repository**: `git clone https://github.com/yourusername/lean-architecture.git`
+1. **Clone the Repository**: `git clone https://github.com/Jewelch/lean_architecture.git`
 2. **Explore the Codebase**: Take a look at the structure of the project and familiarize yourself with the key components.
 3. **Experiment**: Feel free to experiment with Lean Architecture in your own projects and see how it fits your development workflow.
 
@@ -35,5 +35,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Contact
 
-For any questions or inquiries, please contact [jewelcheriaa@gmail.com] [+33 7 63 10 21 55).
+For any questions or inquiries, please contact me via [email] (jewelcheriaa@gmail.com) (mobil)[+216 24 226 712]  or WhatsApp (+33 7 43 10 44 25).
 
