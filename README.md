@@ -35,5 +35,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Contact
 
-For any questions or inquiries, please contact me via [email] (jewelcheriaa@gmail.com) (mobil)[+216 24 226 712]  or WhatsApp (+33 7 43 10 44 25).
+For any questions or inquiries, please contact me via:
+
+- **Email:** [jewelcheriaa@gmail.com](mailto:jewelcheriaa@gmail.com)
+- **Mobile:** [+216 24 226 712](tel:+21624226712)
+- **WhatsApp:** [+33 7 43 10 44 25](https://wa.me/33743104425)
 
