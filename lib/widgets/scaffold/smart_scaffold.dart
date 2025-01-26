@@ -115,7 +115,7 @@ class SmartScaffold extends StatelessWidget {
               (Platform.isIOS ? FloatingActionButtonLocation.endDocked : FloatingActionButtonLocation.endFloat),
           backgroundColor: backgroundColor,
           resizeToAvoidBottomInset: resizeToAvoidBottomInset,
-          bottomNavigationBar: _BottomBar(bottomBarParent).visibleWhen(true),
+          bottomNavigationBar: bottomNavigationBar ?? _BottomBar(bottomBarParent).visibleWhen(true),
         ),
       );
 }

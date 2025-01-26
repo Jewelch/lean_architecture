@@ -100,9 +100,7 @@ class TopBar extends StatelessWidget implements PreferredSizeWidget {
               color: actionIconColor,
               size: 30,
             ),
-            onPressed: () {
-              FocusScope.of(context).unfocus();
-            },
+            onPressed: FocusScope.of(context).unfocus,
           ).customPadding(right: 15),
         if (displayClose)
           IconButton(
@@ -111,9 +109,7 @@ class TopBar extends StatelessWidget implements PreferredSizeWidget {
               color: actionIconColor,
               size: 30,
             ),
-            onPressed: () {
-              FocusScope.of(context).unfocus();
-            },
+            onPressed: FocusScope.of(context).unfocus,
           ).customPadding(right: 15),
         if (actionIconData != null)
           IconButton(

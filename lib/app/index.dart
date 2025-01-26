@@ -6,3 +6,4 @@ export './styles/app_fonts.dart';
 export './styles/app_styles.dart';
 export './styles/font_sizes.dart';
 export './themes/app_themes.dart';
+export 'settings/app_settings.dart';

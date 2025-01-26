@@ -5,7 +5,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:lean_requester/lean_interceptor.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'app/themes/app_themes.dart';
+import 'app/settings/app_settings.dart';
 import 'managers/cache/get_storage.dart';
 import 'managers/cache/shared_preferences.dart';
 import 'managers/connectivity/connectivity_plus.dart';
@@ -18,7 +18,7 @@ T get<T extends Object>([_]) => AppInjections.di.get<T>();
 abstract class AppInjections {
   static const dependencyContainerEnvValue = String.fromEnvironment("DependencyContainer");
   static const cacheManagerEnvValue = String.fromEnvironment("CacheManager");
-  static const connectivityMonitorEnvValue = String.fromEnvironment("connectivityMonitor");
+  static const connectivityMonitorEnvValue = String.fromEnvironment("ConnectivityMonitor");
 
   //= DI Container
   static final DependecyInjectionContainer di = (dependencyContainerEnvValue == "get_it") ? GetItContainer() : Kiwi();
@@ -43,7 +43,7 @@ abstract class AppInjections {
       };
 
   static _synchronous() async => {
-        di.registerSingleton<ThemeCubit>(ThemeCubit()),
+        di.registerSingleton(AppSettings()),
         di.registerLazySingleton(() => Dio()),
 
         //= Connectivity Monitor
@@ -51,7 +51,7 @@ abstract class AppInjections {
           //? ConnectivityPlus
           "connectivity_plus" => di.registerLazySingleton<ConnectivityMonitor>(() => ConnectivityPlus(Connectivity())),
           //? FlutterNetConnectivity
-          "flut_netw_connectivity" => di.registerLazySingleton<ConnectivityMonitor>(() => FlutterNetConnectivity(
+          "flutter_network_connectivity" => di.registerLazySingleton<ConnectivityMonitor>(() => FlutterNetConnectivity(
                 FlutterNetworkConnectivity(
                   isContinousLookUp: true,
                   lookUpDuration: const Duration(seconds: 5),

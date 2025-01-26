@@ -16,9 +16,6 @@ dependencies:
   lean_requester:
     path: ../lean_requester
 
-  scripts_package:
-    path: ../scripts_package
- 
   cg_core_defs:
     path: ../cg_core_defs
 
@@ -41,9 +38,14 @@ dependencies:
   get_it: 
   kiwi: ^5.0.1
 
+  http: ^1.2.2
+  version: ^3.0.2
+  
   # Location
   location: ^7.0.0
   geolocator: ^12.0.0
+  
+
   
 dev_dependencies:
   flutter_test:
@@ -52,9 +54,15 @@ dev_dependencies:
   mocktail:
   flutter_lints:
   build_runner:
-
+  flutter_launcher_icons:
+  flutter_native_splash: 2.4.1
+  
 flutter:
   uses-material-design: true
+
   assets: 
     - assets/images/
     - assets/env/
+    
+  # Enable generation of localized Strings from arb files.
+  generate: true

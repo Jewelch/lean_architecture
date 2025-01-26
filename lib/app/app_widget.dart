@@ -1,4 +1,6 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 import '../base/screens/exports.dart';
 import '../modules/index.dart';
@@ -13,14 +15,29 @@ class AppWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => get<ThemeCubit>(),
-      child: BlocBuilder<ThemeCubit, ThemeData>(
-        builder: (_, theme) {
+    return BlocProvider<AppSettings>(
+      create: get,
+      child: BlocBuilder<AppSettings, SettingsState>(
+        builder: (_, state) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             navigatorKey: navigatorKey,
-            theme: theme,
+
+            //$ Theme Management
+            themeMode: state.themeMode,
+            theme: AppThemes.light,
+            darkTheme: AppThemes.dark,
+
+            //! Localizations
+            localizationsDelegates: const [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: AppSettings.supportedLocales,
+            locale: state.locale,
+
             home: Scaffold(
               body: Column(
                 children: [
@@ -30,7 +47,7 @@ class AppWidget extends StatelessWidget {
                       ProductsScreen(),
                       LocationScreen(),
                       const ProfileScreen(),
-                    ][1],
+                    ][0],
                   ),
                   const _ConnectivityWidget(),
                 ],

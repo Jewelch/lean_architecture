@@ -23,8 +23,8 @@ final class ProductsScreen extends StatelessWidget {
         title: "Products List",
         body: switch (state) {
           Idle() => const SizedBox.shrink(),
-          Loading() => const CircularProgressIndicator(strokeWidth: 1).squared(side: 20).center(),
-          Error() => Text(state.message),
+          Loading() => const CircularProgressIndicator(strokeWidth: 1).squared(20).center(),
+          Error(message: final String message) => Text(message),
           Empty() => const SizedBox.shrink(),
           //? Pattern matching
           Success(products: final List<Product> products) => Column(
@@ -46,13 +46,6 @@ final class ProductsScreen extends StatelessWidget {
           child: const Text("Get products"),
           onPressed: () => context.read<ProductsBloc>().add(GetProducts(Random().nextInt(20))),
         ).resize(width: 200, height: 45),
-        bottomNavigationBar: Observer(
-            observes: get<ConnectivityMonitor>().isConnectedObs,
-            builder: (context, isConnected) => Container(
-                  height: 25,
-                  width: double.infinity,
-                  color: isConnected ? Colors.green : Colors.red,
-                )),
       ),
     );
   }

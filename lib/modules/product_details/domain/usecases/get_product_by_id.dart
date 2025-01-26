@@ -1,7 +1,6 @@
 import 'package:lean_requester/lean_interceptor.dart';
 
 import '../../data/datasource/product_datasource.dart';
-import '../../data/models/product_model.dart';
 import '../entities/product.dart';
 
 class GetProductByIdUC implements UseCase<Product, Params> {
@@ -12,8 +11,11 @@ class GetProductByIdUC implements UseCase<Product, Params> {
   @override
   UsecaseResult<Product> call(Params params) async {
     try {
-      final ProductModel product = await dataSource.getProductById(params.id);
-      return Right(Product.from(product));
+      return Right(
+        Product.from(
+          await dataSource.getProductById(params.id),
+        ),
+      );
     } on CacheException {
       return Left(CacheFailure());
     } on ServerException {

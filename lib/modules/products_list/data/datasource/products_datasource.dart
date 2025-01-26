@@ -14,20 +14,19 @@ final class ProductsDataSourceImpl extends LeanRequesterConfig implements Produc
   }) : super(client, cacheManager, connectivityMonitor);
 
   @override
-  Future<List<ProductModel>> getProducts() async {
-    return (await performDecodingRequest(
-          // mockingEnabled: true,
-          cachingKey: 'productsKey',
-          path: "products",
-          method: RestfullMethods.get,
-          dao: ProductModel(),
-          asList: true,
-          listKey: "products",
-          mockingData: true ? {"products": productsMap} : productsMap,
-        ) as DaoList<ProductModel>)
-            .list ??
-        [];
-  }
+  Future<List<ProductModel>> getProducts() async =>
+      (await performDecodingRequest(
+        // mockingEnabled: true,
+        cachingKey: 'productsKey',
+        path: "products",
+        method: RestfullMethods.get,
+        dao: ProductModel(),
+        asList: true,
+        listKey: "products",
+        mockingData: true ? {"products": productsMap} : productsMap,
+      ) as DaoList<ProductModel>)
+          .list ??
+      [];
 }
 
 const productsMap = [
@@ -54,7 +53,8 @@ const productsMap = [
   {
     "id": 2,
     "title": "iPhone X",
-    "description": "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...",
+    "description":
+        "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...",
     "price": 899,
     "discountPercentage": 17.94,
     "rating": 4.44,

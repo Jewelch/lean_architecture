@@ -1,13 +1,13 @@
 flutter_native_splash:
   color: "#194269"
-  image: assets/images/splash.png
+  image: assets/images/cg_logo.jpeg
   color_dark: "#194269"
-  image_dark: assets/images/splash.png
+  image_dark: assets/images/cg_logo.jpeg
 
   android_12:
-    image: assets/images/splash.png
+    image: assets/images/cg_logo.jpeg
     icon_background_color: "#194269"
-    image_dark: assets/images/splash.png
+    image_dark: assets/images/cg_logo.jpeg
     icon_background_color_dark: "#194269"
 
   web: false

@@ -1,16 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../index.dart';
 
-final class ThemeCubit extends Cubit<ThemeData> {
-  ThemeCubit() : super(_lightTheme);
-
-  /// Toggles the current brightness between light and dark.
-  void toggleTheme() => emit(state.brightness == Brightness.dark ? _lightTheme : _darkTheme);
-
+final class AppThemes {
   //? LIGHT THEME
-  static final ThemeData _lightTheme = ThemeData(
+  static final ThemeData light = ThemeData(
     applyElevationOverlayColor: true,
     useMaterial3: true,
 
@@ -69,7 +63,8 @@ final class ThemeCubit extends Cubit<ThemeData> {
       backgroundColor: AppColors.primary,
       foregroundColor: AppColors.scaffold,
       iconSize: AppConstants.buttons.floating.iconSize,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(AppConstants.buttons.floating.radius))),
+      shape:
+          RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(AppConstants.buttons.floating.radius))),
     ),
 
     //! Divider
@@ -210,7 +205,7 @@ final class ThemeCubit extends Cubit<ThemeData> {
     ),
   );
 
-  static final ThemeData _darkTheme = _lightTheme.copyWith(
+  static final ThemeData dark = light.copyWith(
     colorScheme: const ColorScheme.dark(
       surface: Colors.black54,
       primary: Colors.pink,
@@ -219,10 +214,10 @@ final class ThemeCubit extends Cubit<ThemeData> {
     ),
     scaffoldBackgroundColor: Colors.black45,
     textTheme: const TextTheme(),
-    appBarTheme: _lightTheme.appBarTheme.copyWith(
+    appBarTheme: light.appBarTheme.copyWith(
       color: AppColors.primary,
-      titleTextStyle: _lightTheme.appBarTheme.titleTextStyle,
-      iconTheme: _lightTheme.appBarTheme.iconTheme,
+      titleTextStyle: light.appBarTheme.titleTextStyle,
+      iconTheme: light.appBarTheme.iconTheme,
     ),
   );
 }

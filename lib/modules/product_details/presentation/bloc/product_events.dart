@@ -15,5 +15,3 @@ final class GetProduct extends ProductEvent {
 }
 
 final class ClearProduct extends ProductEvent {}
-
-final class Hachwa extends ProductEvent {}

@@ -1,28 +1,22 @@
 import 'dart:math';
 
 import '../../../../base/screens/exports.dart';
-import '../../injections.dart';
+import '../../dependencies/product_screen_deps.dart';
 import '../bloc/product_bloc.dart';
 import '../bloc/product_events.dart';
 import '../bloc/product_states.dart';
 
-final class ProductDetailsScreen extends StatelessWidget {
-  ProductDetailsScreen({super.key}) {
-    ProductScreenDependencies.inject();
-  }
+final class ProductDetailsScreen extends BaseScreen<ProductScreenDependencies, ProductDetailsBlocImpl> {
+  ProductDetailsScreen({super.key}) : super(dependencies: ProductScreenDependencies());
 
   @override
-  Widget build(BuildContext context) {
-    return BlocProvider<ProductDetailsBlocImpl>(
-      create: (_) => get<ProductDetailsBlocImpl>(),
-      child: BlocConsumer<ProductDetailsBlocImpl, ProductState>(
-        listener: (context, state) {},
+  Widget build(BuildContext context) => BlocBuilder<ProductDetailsBlocImpl, ProductState>(
         builder: (context, state) => SmartScaffold(
           bottomBarParent: BottomBarParents.product,
           title: 'Product details',
           body: switch (state) {
             Idle() => const Text("Idle").center(),
-            Loading() => const CircularProgressIndicator(strokeWidth: 1).squared(side: 20).center(),
+            Loading() => const CircularProgressIndicator(strokeWidth: 1).squared(20).center(),
             Error() => Text(state.message),
             Empty() => const SizedBox.shrink(),
             //? Pattern matching
@@ -31,7 +25,7 @@ final class ProductDetailsScreen extends StatelessWidget {
                   ProductCard(product).customPadding(bottom: 20, top: 50),
                   ElevatedButton(
                     child: const Text("Clear"),
-                    onPressed: () => context.read<ProductDetailsBlocImpl>().add(ClearProduct()),
+                    onPressed: () => bloc.add(ClearProduct()),
                   ).resize(width: 100, height: 45),
                 ],
               ),
@@ -39,10 +33,8 @@ final class ProductDetailsScreen extends StatelessWidget {
           floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
           floatingActionButton: ElevatedButton(
             child: const Text("Get product"),
-            onPressed: () => context.read<ProductDetailsBlocImpl>().add(GetProduct(Random().nextInt(20))),
+            onPressed: () => bloc.add(GetProduct(Random().nextInt(20))),
           ).resize(width: 200, height: 45),
         ),
-      ),
-    );
-  }
+      );
 }

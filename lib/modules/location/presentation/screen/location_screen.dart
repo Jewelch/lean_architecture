@@ -63,7 +63,7 @@ class _Body extends StatelessWidget {
   Widget build(BuildContext context) {
     return switch (state) {
       Idle() => const SizedBox(),
-      Loading() => const CircularProgressIndicator(strokeWidth: 1).squared(side: 20).center(),
+      Loading() => const CircularProgressIndicator(strokeWidth: 1).squared(20).center(),
       Error(message: final message) => Text(message),
       Empty() => const SizedBox.shrink(),
       //? Pattern matching

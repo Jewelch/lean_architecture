@@ -49,6 +49,10 @@ extension WidgetModifier on Widget {
         child: this,
       );
 
+  Transform flipX() => Transform.flip(flipX: true, child: this);
+  Transform flipY() => Transform.flip(flipY: true, child: this);
+  Transform flipXY() => Transform.flip(flipX: true, flipY: true, child: this);
+
   Positioned positioned({
     double? left,
     double? right,
@@ -111,6 +115,15 @@ extension WidgetModifier on Widget {
         child: Padding(padding: padding, child: this),
       );
 
+  GestureDetector detectGesture(
+    VoidCallback onTap, {
+    EdgeInsets padding = EdgeInsets.zero,
+  }) =>
+      GestureDetector(
+        onTap: onTap,
+        child: Container(padding: padding, child: this),
+      );
+
   IconButton asIconButton({required VoidCallback onTap}) => IconButton(
         onPressed: onTap,
         icon: this,
@@ -120,12 +133,6 @@ extension WidgetModifier on Widget {
       Padding(key: key, padding: EdgeInsets.symmetric(horizontal: value, vertical: value), child: this);
 
   Padding symmetricPadding({double horizontal = 0, double vertical = 0}) => Padding(
-        key: key,
-        padding: EdgeInsets.symmetric(horizontal: horizontal, vertical: vertical),
-        child: this,
-      );
-
-  Padding staticSymmetricPadding({double horizontal = 0, double vertical = 0}) => Padding(
         key: key,
         padding: EdgeInsets.symmetric(horizontal: horizontal, vertical: vertical),
         child: this,
@@ -213,6 +220,39 @@ extension WidgetModifier on Widget {
       );
   Visibility hide({Key? key}) => Visibility(key: key, visible: false, child: this);
 
+  Container decorate({
+    Key? key,
+    AlignmentGeometry? alignment,
+    EdgeInsetsGeometry? padding,
+    Color? color,
+    Decoration? decoration,
+    Decoration? foregroundDecoration,
+    double? width,
+    double? height,
+    BoxConstraints? constraints,
+    EdgeInsetsGeometry? margin,
+    Matrix4? transform,
+    AlignmentGeometry? transformAlignment,
+    Widget? child,
+    Clip clipBehavior = Clip.none,
+  }) =>
+      Container(
+        key: key,
+        alignment: alignment,
+        margin: margin,
+        padding: padding,
+        color: color,
+        decoration: decoration,
+        foregroundDecoration: foregroundDecoration,
+        width: width,
+        height: height,
+        constraints: constraints,
+        transform: transform,
+        transformAlignment: transformAlignment,
+        clipBehavior: clipBehavior,
+        child: this,
+      );
+
   SizedBox resize({Key? key, double? width, double? height}) => SizedBox(
         key: key,
         width: width,
@@ -220,7 +260,11 @@ extension WidgetModifier on Widget {
         child: this,
       );
 
-  SizedBox squared({Key? key, required double side}) => SizedBox(
+  SizedBox squared(
+    double side, {
+    Key? key,
+  }) =>
+      SizedBox(
         key: key,
         width: side,
         height: side,
@@ -248,6 +292,24 @@ extension WidgetModifier on Widget {
 
   Expanded expanded({Key? key, int flex = 1}) => Expanded(key: key, flex: flex, child: this);
 
+  Container addTopShadow({
+    EdgeInsetsGeometry? margin = EdgeInsets.zero,
+    EdgeInsetsGeometry? padding = EdgeInsets.zero,
+  }) =>
+      Container(
+          margin: margin,
+          padding: padding,
+          decoration: const BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: Colors.white,
+                blurRadius: 20,
+                offset: Offset(0, -20),
+              ),
+            ],
+          ),
+          child: this);
+
   Align align(
     AlignmentGeometry alignment, {
     Key? key,
@@ -264,6 +326,31 @@ extension WidgetModifier on Widget {
     Clip clipBehavior = Clip.none,
   }) =>
       FittedBox(key: key, fit: fit, alignment: alignment, clipBehavior: clipBehavior, child: this);
+
+  Widget wrap({
+    Key? key,
+    Axis direction = Axis.horizontal,
+    WrapAlignment alignment = WrapAlignment.start,
+    double spacing = 0.0,
+    WrapAlignment runAlignment = WrapAlignment.start,
+    double runSpacing = 0.0,
+    WrapCrossAlignment crossAxisAlignment = WrapCrossAlignment.start,
+    TextDirection? textDirection,
+    VerticalDirection verticalDirection = VerticalDirection.down,
+    Clip clipBehavior = Clip.none,
+  }) =>
+      Wrap(
+        key: key,
+        direction: direction,
+        alignment: alignment,
+        spacing: spacing,
+        runAlignment: runAlignment,
+        runSpacing: runSpacing,
+        crossAxisAlignment: crossAxisAlignment,
+        textDirection: textDirection,
+        verticalDirection: verticalDirection,
+        clipBehavior: clipBehavior,
+      );
 
   /// Creates a widget that applies an Blur effect to its child.
   Container applyBlur(
@@ -368,35 +455,40 @@ extension WidgetModifier on Widget {
         triggerMode: triggerMode,
         child: this,
       );
-
-  Container decorate({
-    Key? key,
-    double? width,
-    double? height,
-    EdgeInsetsGeometry? padding,
-    EdgeInsetsGeometry? margin,
-    required BoxDecoration decoration,
-    BorderRadiusGeometry? borderRadius,
-  }) =>
-      Container(
-        key: key,
-        width: width,
-        height: height,
-        margin: margin,
-        padding: padding,
-        decoration: decoration,
-        child: this,
-      );
 }
 
 //! Extensions on List<Widget>
 extension WidgetListPadder on List<Widget> {
-  Padding overallPaddding([double value = 16]) =>
-      Padding(padding: EdgeInsets.symmetric(horizontal: value, vertical: value), child: Column(children: this));
+  Padding overallPaddding({
+    double value = 16,
+    MainAxisSize mainAxisSize = MainAxisSize.max,
+    MainAxisAlignment mainAxisAlignment = MainAxisAlignment.start,
+    CrossAxisAlignment crossAxisAlignment = CrossAxisAlignment.center,
+  }) =>
+      Padding(
+          padding: EdgeInsets.all(value),
+          child: Column(
+            mainAxisSize: mainAxisSize,
+            mainAxisAlignment: mainAxisAlignment,
+            crossAxisAlignment: crossAxisAlignment,
+            children: this,
+          ));
 
-  Padding symmetricPadding({double horizontal = 0, double vertical = 0}) => Padding(
+  Padding symmetricPadding({
+    double horizontal = 0,
+    double vertical = 0,
+    MainAxisSize mainAxisSize = MainAxisSize.max,
+    MainAxisAlignment mainAxisAlignment = MainAxisAlignment.start,
+    CrossAxisAlignment crossAxisAlignment = CrossAxisAlignment.center,
+  }) =>
+      Padding(
         padding: EdgeInsets.symmetric(horizontal: horizontal, vertical: vertical),
-        child: Column(children: this),
+        child: Column(
+          mainAxisSize: mainAxisSize,
+          mainAxisAlignment: mainAxisAlignment,
+          crossAxisAlignment: crossAxisAlignment,
+          children: this,
+        ),
       );
 
   Padding customPadding({
@@ -404,8 +496,18 @@ extension WidgetListPadder on List<Widget> {
     double right = 0,
     double top = 0,
     double bottom = 0,
+    MainAxisSize mainAxisSize = MainAxisSize.max,
+    MainAxisAlignment mainAxisAlignment = MainAxisAlignment.start,
+    CrossAxisAlignment crossAxisAlignment = CrossAxisAlignment.center,
   }) =>
-      Padding(padding: EdgeInsets.fromLTRB(left, top, right, bottom), child: Column(children: this));
+      Padding(
+          padding: EdgeInsets.fromLTRB(left, top, right, bottom),
+          child: Column(
+            mainAxisSize: mainAxisSize,
+            mainAxisAlignment: mainAxisAlignment,
+            crossAxisAlignment: crossAxisAlignment,
+            children: this,
+          ));
 
   Padding symmetricPaddedColumn({
     double horizontal = 0,
