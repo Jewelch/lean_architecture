@@ -1,5 +1,5 @@
 import '../../../../api/data_source.dart';
-import '../../../product_details/data/models/product_model.dart';
+import '../../../product_details/common/data/models/product_model.dart';
 
 abstract interface class ProductsDataSource {
   /// Calls the https://dummyjson.com/products endpoint.

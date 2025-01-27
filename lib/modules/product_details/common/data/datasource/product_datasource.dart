@@ -1,4 +1,4 @@
-import '../../../../api/data_source.dart';
+import '../../../../../api/data_source.dart';
 import '../models/product_model.dart';
 
 abstract interface class ProductDataSource {

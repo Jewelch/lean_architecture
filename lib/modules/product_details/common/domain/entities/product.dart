@@ -9,6 +9,8 @@ base class Product extends DTO {
   final num price;
   final String thumbnail;
 
+  bool get isEmpty => title.isEmpty && description.isEmpty;
+
   const Product({
     required this.title,
     required this.description,

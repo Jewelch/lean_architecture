@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:lean_requester/lean_interceptor.dart';
 
-import '../../../product_details/domain/entities/product.dart';
+import '../../../product_details/common/domain/entities/product.dart';
 import '../../domain/usecases/get_products.dart';
 import 'products_events.dart';
 import 'products_states.dart';

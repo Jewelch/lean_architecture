@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:lean_architecture/modules/index.dart';
 
 import '../../../../base/screens/exports.dart';
-import '../../../product_details/domain/entities/product.dart';
+import '../../../product_details/common/domain/entities/product.dart';
 import '../../injections.dart';
 import '../bloc/products_bloc.dart';
 import '../bloc/products_events.dart';

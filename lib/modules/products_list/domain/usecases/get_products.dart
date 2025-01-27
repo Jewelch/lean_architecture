@@ -1,5 +1,5 @@
 import '../../../../api/data_source.dart';
-import '../../../product_details/domain/entities/product.dart';
+import '../../../product_details/common/domain/entities/product.dart';
 import '../../data/datasource/products_datasource.dart';
 
 final class GetProductsUC implements UseCase<List<Product>, NoParams> {

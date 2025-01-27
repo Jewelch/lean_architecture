@@ -10,16 +10,16 @@ abstract class BaseBloc<E, S> extends Bloc<E, S> {
   @mustCallSuper
   void onInit() {
     WidgetsBinding.instance.addPostFrameCallback((_) => onReady());
-    Debugger.red("onInit");
+    Debugger.yellow("$runtimeType initialized");
   }
 
   @mustCallSuper
   void onReady() {
-    Debugger.red("onReady");
+    Debugger.green("$runtimeType ready");
   }
 
   @mustCallSuper
   void onClose() {
-    Debugger.red("onClose");
+    Debugger.red("$runtimeType closed");
   }
 }

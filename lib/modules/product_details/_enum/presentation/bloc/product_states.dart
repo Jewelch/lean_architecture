@@ -1,6 +1,6 @@
 import 'package:lean_architecture/base/bloc/base_states.dart';
 
-import '../../../product_details/domain/entities/product.dart';
+import '../../../common/domain/entities/product.dart';
 
 class ProductStates extends BaseState<Product> {
   const ProductStates._(

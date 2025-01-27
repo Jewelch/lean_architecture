@@ -2,23 +2,26 @@ import '../bloc/base_bloc.dart';
 import '../dependencies/dependencies.dart';
 import 'exports.dart';
 
-abstract class FullBlocProvidingWidget<B extends BaseBloc> extends StatefulWidget {
-  FullBlocProvidingWidget({super.key, this.dependencies});
+abstract class BlocProviderWidget<B extends BaseBloc> extends StatefulWidget {
+  BlocProviderWidget({
+    super.key,
+    this.dependencies,
+  });
 
   final Dependencies? dependencies;
 
   B get bloc => _state!.bloc;
 
-  _State<FullBlocProvidingWidget, B>? _state;
+  _State<BlocProviderWidget, B>? _state;
 
   @override
-  createState() => _State<FullBlocProvidingWidget, B>();
+  createState() => _State<BlocProviderWidget, B>();
 
   @protected
   Widget build(BuildContext context);
 }
 
-class _State<T extends FullBlocProvidingWidget, B extends BaseBloc> extends State<T> {
+class _State<T extends BlocProviderWidget, B extends BaseBloc> extends State<T> {
   late B bloc = get<B>();
 
   @override
