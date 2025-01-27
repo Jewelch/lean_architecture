@@ -1,23 +1,21 @@
 import 'dart:math';
 
-import 'package:lean_architecture/modules/index.dart';
+import '../../../base/screens/exports.dart';
+import '../../product/domain/entities/product.dart';
+import '../products_screen_deps.dart';
+import 'bloc/products_bloc.dart';
+import 'bloc/products_events.dart';
+import 'bloc/products_states.dart';
 
-import '../../../../base/screens/exports.dart';
-import '../../../product_details/common/domain/entities/product.dart';
-import '../../injections.dart';
-import '../bloc/products_bloc.dart';
-import '../bloc/products_events.dart';
-import '../bloc/products_states.dart';
-
-final class ProductsScreen extends StatelessWidget {
-  ProductsScreen({super.key}) {
-    ProductsDependencies.inject();
-  }
+final class ProductsScreen extends BlocProviderWidget<ProductsBloc> {
+  ProductsScreen({super.key})
+      : super(
+          dependencies: ProductsDependencies(),
+        );
 
   @override
   Widget build(BuildContext context) {
-    return BuildingBlocProvider<ProductsBloc, ProductState>(
-      create: get,
+    return BlocBuilder<ProductsBloc, ProductState>(
       builder: (context, state) => SmartScaffold(
         bottomBarParent: BottomBarParents.list,
         title: "Products List",

@@ -1,43 +1,55 @@
-import '../../../../../base/screens/exports.dart';
-import '../../../common/presentation/widgets/clear_button.dart';
-import '../../dependencies/product_screen_deps.dart';
-import '../bloc/product_bloc.dart';
-import '../bloc/product_events.dart';
-import '../bloc/product_states.dart';
+import '../../../../base/screens/exports.dart';
+import '../product_screen_deps.dart';
+import 'bloc/product_bloc.dart';
+import 'bloc/product_events.dart';
+import 'bloc/product_states.dart';
+import 'widgets/clear_button.dart';
 
-final class ProductDetailsScreen extends BlocProviderWidget<ProductDetailsBlocClasses> {
+final class ProductDetailsScreen extends BlocProviderWidget<ProductDetailsBloc> {
   ProductDetailsScreen({super.key})
       : super(
           dependencies: ProductScreenDependencies(),
+          listenWhen: (previous, current) => true,
+          fullRebuildWhen: (_, currentState) => currentState is Loading,
         );
 
   @override
   Widget build(BuildContext context) => SmartScaffold(
         bottomBarParent: BottomBarParents.product,
-        title: 'Product details (Classes)',
-        body: BlocBuilder<ProductDetailsBlocClasses, ProductState>(
+        title: 'Product Details',
+        body: BlocBuilder<ProductDetailsBloc, ProductState>(
           builder: (context, state) => switch (state) {
-            Idle() => TextFormField(controller: bloc.textEditingController).center().overallPadding(),
+            Idle() => TextFormField(controller: bloc.textEditingController).center().overallPadding(30),
             Loading() => const CircularProgressIndicator(strokeWidth: 1).squared(20).center(),
             Error() => Column(
                 mainAxisAlignment: MainAxisAlignment.center,
+                spacing: 16,
                 children: [
                   Text(state.message).center(),
-                  ClearButton<ProductDetailsBlocClasses>().customPadding(top: 16),
+                  ClearButton<ProductDetailsBloc>(),
                 ],
               ),
             Empty() => Column(
                 mainAxisAlignment: MainAxisAlignment.center,
+                spacing: 16,
                 children: [
                   const Text("No data").center(),
-                  ClearButton<ProductDetailsBlocClasses>().customPadding(top: 16),
+                  ClearButton<ProductDetailsBloc>(),
                 ],
               ),
+
             //? Pattern matching
             Success(product: final product) => Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                spacing: 10,
                 children: [
-                  ProductCard(product).customPadding(bottom: 20, top: 50),
-                  ClearButton<ProductDetailsBlocClasses>(),
+                  ProductCard(product),
+
+                  //! RECOMMENDED APPROACH
+                  ClearButton<ProductDetailsBloc>(),
+
+                  //? ALTERNATIVE APPROACH
+                  ClearButton2(bloc),
                 ],
               ),
           },
@@ -45,7 +57,7 @@ final class ProductDetailsScreen extends BlocProviderWidget<ProductDetailsBlocCl
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         floatingActionButton: ElevatedButton(
           child: const Text("Get product"),
-          onPressed: () => bloc.add(GetProduct(bloc.textEditingController.text)),
+          onPressed: () => bloc.add(GetProduct("1")),
         ).resize(width: 200, height: 45),
       );
 }

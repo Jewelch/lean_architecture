@@ -18,10 +18,13 @@ abstract base class _LeanRequesterImpl extends LeanRequester {
 
   @override
   int mockAwaitDuraitonInMilliseconds = 500;
+
+  @override
+  bool deuggingEnabled = false;
   @override
   bool mockingModeEnabled = false;
   @override
-  bool logRequestHeaders = true;
+  bool logRequestHeaders = false;
   @override
   bool logResponseHeaders = false;
   @override

@@ -4,7 +4,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 
 import '../base/screens/exports.dart';
 import '../modules/index.dart';
-import '../modules/product_details/_enum/presentation/screen/product_screen.dart';
 
 class AppWidget extends StatelessWidget {
   static final navigatorKey = GlobalKey<NavigatorState>();
@@ -44,11 +43,11 @@ class AppWidget extends StatelessWidget {
                 children: [
                   Expanded(
                     child: [
+                      // ProductDetailsScreen2(),
                       ProductDetailsScreen(),
-                      ProductDetailsScreenEnum(),
-                      ProductsScreen(),
-                      LocationScreen(),
-                      const ProfileScreen(),
+                      // ProductsScreen(),
+                      // LocationScreen(),
+                      // const ProfileScreen(),
                     ][0],
                   ),
                   const _ConnectivityWidget(),

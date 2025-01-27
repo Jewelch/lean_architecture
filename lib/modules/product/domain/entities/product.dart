@@ -11,7 +11,7 @@ base class Product extends DTO {
 
   bool get isEmpty => title.isEmpty && description.isEmpty;
 
-  const Product({
+  const Product._({
     required this.title,
     required this.description,
     required this.rating,
@@ -19,7 +19,7 @@ base class Product extends DTO {
     required this.thumbnail,
   });
 
-  factory Product.from(ProductModel productModel) => Product(
+  factory Product.from(ProductModel productModel) => Product._(
         title: productModel.title ?? "",
         description: productModel.description ?? "",
         rating: productModel.rating ?? 0,

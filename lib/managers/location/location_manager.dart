@@ -22,9 +22,8 @@ class LocationManager {
   }) : _plugin = locationPlugin;
 
   Future<void> initialize() async {
-    await getUserCurrentLocation();
-
-    localizationServiceStatusStreamSubscription ??= Geolocator.getServiceStatusStream().listen((ServiceStatus status) async {
+    localizationServiceStatusStreamSubscription ??=
+        Geolocator.getServiceStatusStream().listen((ServiceStatus status) async {
       if (status != ServiceStatus.enabled) {
         userCoordinatesObs.annihilate();
         placeDetailsObs.annihilate();
@@ -93,7 +92,8 @@ class Notifier {
     );
 
     // Show the SnackBar and wait for its duration
-    ScaffoldFeatureController<SnackBar, SnackBarClosedReason> snackBarController = scaffoldMessenger.showSnackBar(snackBar);
+    ScaffoldFeatureController<SnackBar, SnackBarClosedReason> snackBarController =
+        scaffoldMessenger.showSnackBar(snackBar);
     await snackBarController.closed;
   }
 }

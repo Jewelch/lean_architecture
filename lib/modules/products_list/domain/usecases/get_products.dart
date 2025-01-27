@@ -1,5 +1,5 @@
 import '../../../../api/data_source.dart';
-import '../../../product_details/common/domain/entities/product.dart';
+import '../../../product/domain/entities/product.dart';
 import '../../data/datasource/products_datasource.dart';
 
 final class GetProductsUC implements UseCase<List<Product>, NoParams> {
@@ -8,7 +8,7 @@ final class GetProductsUC implements UseCase<List<Product>, NoParams> {
   const GetProductsUC(this.dataSource);
 
   @override
-  UsecaseResult<List<Product>> call(NoParams params) async {
+  UseCaseResult<List<Product>> call(NoParams params) async {
     try {
       return Right(
         (await dataSource.getProducts())

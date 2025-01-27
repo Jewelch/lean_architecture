@@ -1,16 +1,14 @@
-import 'package:lean_architecture/base/screens/exports.dart';
-
 import '../../../../../base/bloc/exports.dart';
-import '../../../common/domain/usecases/get_product_by_id.dart';
+import '../../domain/usecases/get_product_by_id.dart';
 import 'product_events.dart';
 import 'product_states.dart';
 
-final class ProductDetailsBlocClasses extends BaseBloc<ProductEvent, ProductState> {
+final class ProductDetailsBloc extends BaseBloc<ProductEvent, ProductState> {
   final textEditingController = TextEditingController();
 
   final getProductById = get<GetProductByIdUC>();
 
-  ProductDetailsBlocClasses() : super(Idle()) {
+  ProductDetailsBloc() : super(Idle()) {
     on<GetProduct>(loadProduct);
     on<ClearProduct>(clearProduct);
   }
@@ -29,8 +27,8 @@ final class ProductDetailsBlocClasses extends BaseBloc<ProductEvent, ProductStat
   clearProduct(ClearProduct event, Emitter<ProductState> emit) => emit(Idle());
 
   @override
-  void onClose() {
+  void onDispose() {
     textEditingController.dispose();
-    super.onClose();
+    super.onDispose();
   }
 }

@@ -9,13 +9,9 @@ class GetProductByIdUC implements UseCase<Product, Params> {
   const GetProductByIdUC(this.dataSource);
 
   @override
-  UsecaseResult<Product> call(Params params) async {
+  UseCaseResult<Product> call(Params params) async {
     try {
-      return Right(
-        Product.from(
-          await dataSource.getProductById(params.id),
-        ),
-      );
+      return Right(Product.from(await dataSource.getProductById(params.id)));
     } on CacheException {
       return Left(CacheFailure());
     } on ServerException {

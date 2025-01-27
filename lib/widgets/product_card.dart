@@ -1,5 +1,5 @@
 import '../base/screens/exports.dart';
-import '../modules/product_details/common/domain/entities/product.dart';
+import '../modules/product/domain/entities/product.dart';
 
 final class ProductCard extends StatelessWidget {
   const ProductCard(this.product);

@@ -1,5 +1,5 @@
 import '../../../../api/data_source.dart';
-import '../../../product_details/common/data/models/product_model.dart';
+import '../../../product/data/models/product_model.dart';
 
 abstract interface class ProductsDataSource {
   /// Calls the https://dummyjson.com/products endpoint.
@@ -23,7 +23,7 @@ final class ProductsDataSourceImpl extends LeanRequesterConfig implements Produc
         dao: ProductModel(),
         asList: true,
         listKey: "products",
-        mockingData: true ? {"products": productList} : productList,
+        mockingData: (0 == 0) ? {"products": productList} : productList,
       ) as DaoList<ProductModel>)
           .list ??
       [];

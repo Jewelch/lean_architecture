@@ -1,8 +1,5 @@
-import 'package:lean_architecture/base/extensions/index.dart';
-
+import '../../../base/extensions/index.dart';
 import '../../../base/screens/exports.dart';
-
-part 'widgets/app_bar.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});

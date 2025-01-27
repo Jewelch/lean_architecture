@@ -1,10 +1,12 @@
 import '../../app_injections.dart';
+import '../../base/dependencies/dependencies.dart';
 import 'data/datasource/products_datasource.dart';
 import 'domain/usecases/get_products.dart';
 import 'presentation/bloc/products_bloc.dart';
 
-class ProductsDependencies {
-  static void inject() {
+class ProductsDependencies implements Dependencies {
+  @override
+  void inject() {
     //? Bloc
     AppInjections.di.registerFactory(() => ProductsBloc(get()));
 

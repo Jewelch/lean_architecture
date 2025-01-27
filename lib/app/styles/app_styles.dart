@@ -1,4 +1,4 @@
-import 'package:lean_architecture/base/screens/exports.dart';
+import '../../base/screens/exports.dart';
 
 abstract final class AppStyles {
   static const _defaultFont = AppFonts.helvetica;

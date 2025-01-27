@@ -1,12 +1,10 @@
-import 'package:bloc/bloc.dart';
-import 'package:lean_requester/lean_interceptor.dart';
-
-import '../../../product_details/common/domain/entities/product.dart';
+import '../../../../base/bloc/exports.dart';
+import '../../../product/domain/entities/product.dart';
 import '../../domain/usecases/get_products.dart';
 import 'products_events.dart';
 import 'products_states.dart';
 
-final class ProductsBloc extends Bloc<ProductEvent, ProductState> {
+final class ProductsBloc extends BaseBloc<ProductEvent, ProductState> {
   final GetProductsUC getProductById;
 
   ProductsBloc(this.getProductById) : super(Idle()) {
