@@ -5,13 +5,6 @@ sealed class ProductEvent extends Equatable {
   List<Object> get props => [];
 }
 
-final class GetProduct extends ProductEvent {
-  final String id;
-
-  GetProduct([this.id = "0"]);
-
-  @override
-  List<Object> get props => [];
-}
+final class GetProduct extends ProductEvent {}
 
 final class ClearProduct extends ProductEvent {}

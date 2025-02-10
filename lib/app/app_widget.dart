@@ -9,7 +9,7 @@ class AppWidget extends StatelessWidget {
   static final navigatorKey = GlobalKey<NavigatorState>();
   static BuildContext? get globalContext => navigatorKey.currentContext;
 
-  AppWidget({super.key}) {
+  AppWidget() {
     get<ConnectivityMonitor>().startMonitoring();
   }
 
@@ -43,9 +43,9 @@ class AppWidget extends StatelessWidget {
                 children: [
                   Expanded(
                     child: [
-                      // ProductDetailsScreen2(),
-                      ProductDetailsScreen(),
-                      // ProductsScreen(),
+                      // ProductDetailsScreen(),
+                      // ProductDetailsScreen(),
+                      ProductsScreen(),
                       // LocationScreen(),
                       // const ProfileScreen(),
                     ][0],

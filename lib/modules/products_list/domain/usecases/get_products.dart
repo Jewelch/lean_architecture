@@ -10,17 +10,9 @@ final class GetProductsUC implements UseCase<List<Product>, NoParams> {
   @override
   UseCaseResult<List<Product>> call(NoParams params) async {
     try {
-      return Right(
-        (await dataSource.getProducts())
-            .map(
-              (product) => Product.from(product),
-            )
-            .toList(),
-      );
-    } on CacheException {
-      return Left(CacheFailure());
-    } on ServerException {
-      return Left(ServerFailure());
+      return Right((await dataSource.getProducts()).map(Product.from).toList());
+    } on CommonException catch (e) {
+      return Left(Failure(message: e.message));
     }
   }
 }

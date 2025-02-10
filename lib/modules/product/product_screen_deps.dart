@@ -15,7 +15,7 @@ class ProductScreenDependencies implements Dependencies {
 
     //$ Data sources
     AppInjections.di.registerLazySingleton<ProductDataSource>(
-      () => ProductRemoteDataSourceImpl(
+      () => ProductDataSourceImpl(
         client: get(),
         cacheManager: get(),
         connectivityMonitor: get(),

@@ -3,27 +3,27 @@ import '../models/product_model.dart';
 
 abstract interface class ProductDataSource {
   /// Calls the https://dummyjson.com/products/{id} endpoint.
-  DatasourceResult<ProductModel> getProductById(String id);
+  DataSourceSingleResult<ProductModel> getProductById(String id);
 }
 
-final class ProductRemoteDataSourceImpl extends LeanRequesterConfig implements ProductDataSource {
-  ProductRemoteDataSourceImpl({
+final class ProductDataSourceImpl extends LeanRequesterConfig implements ProductDataSource {
+  ProductDataSourceImpl({
     required Dio client,
     required CacheManager cacheManager,
     required ConnectivityMonitor connectivityMonitor,
   }) : super(client, cacheManager, connectivityMonitor);
 
   @override
-  DatasourceResult<ProductModel> getProductById(String id) async => await performDecodingRequest(
-        // mockingEnabled: true,
-        cachingKey: "productKey",
+  DataSourceSingleResult<ProductModel> getProductById(String id) async => await request(
+        requirement: ProductModel(),
+        method: RestfulMethods.get,
         path: "products/$id",
-        method: RestfullMethods.get,
-        dao: ProductModel(),
+        cachingKey: "productKey",
         mockingData: _mockProductData,
+        mockIt: false,
       );
 
-  Map get _mockProductData => {
+  Map<String, dynamic> get _mockProductData => {
         "id": 2,
         "title": "iPhone de Zahra",
         "description":

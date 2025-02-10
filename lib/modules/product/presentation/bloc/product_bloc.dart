@@ -16,11 +16,15 @@ final class ProductDetailsBloc extends BaseBloc<ProductEvent, ProductState> {
   loadProduct(GetProduct event, Emitter<ProductState> emit) async {
     emit(Loading());
 
-    final result = await getProductById.call(Params(id: event.id));
+    final result = await getProductById.call(Params(id: textEditingController.text));
 
     result.fold(
-      (failure) => emit(Error(message: failure.toString())),
-      (product) => emit(product.isEmpty ? Empty() : Success(product: product)),
+      (failure) => emit(Error(message: failure.message)),
+      (product) => product.isEmpty
+          ? emit(Empty())
+          : emit(
+              Success(product: product),
+            ),
     );
   }
 

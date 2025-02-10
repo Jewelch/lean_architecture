@@ -1,9 +1,11 @@
+import 'dart:math' show Random;
+
 import '../../../../api/data_source.dart';
 import '../../../product/data/models/product_model.dart';
 
 abstract interface class ProductsDataSource {
   /// Calls the https://dummyjson.com/products endpoint.
-  Future<List<ProductModel>> getProducts();
+  DataSourceResultAsListOf<ProductModel> getProducts();
 }
 
 final class ProductsDataSourceImpl extends LeanRequesterConfig implements ProductsDataSource {
@@ -14,19 +16,20 @@ final class ProductsDataSourceImpl extends LeanRequesterConfig implements Produc
   }) : super(client, cacheManager, connectivityMonitor);
 
   @override
-  Future<List<ProductModel>> getProducts() async =>
-      (await performDecodingRequest(
-        // mockingEnabled: true,
-        cachingKey: 'productsKey',
-        path: "products",
-        method: RestfullMethods.get,
-        dao: ProductModel(),
-        asList: true,
-        listKey: "products",
-        mockingData: (0 == 0) ? {"products": productList} : productList,
-      ) as DaoList<ProductModel>)
-          .list ??
-      [];
+  DataSourceResultAsListOf<ProductModel> getProducts() async => await futureListOf<ProductModel>(
+        from: request(
+          requirements: (
+            dao: ProductModel(),
+            asList: true,
+            listKey: "products",
+          ),
+          method: RestfulMethods.get,
+          path: "products",
+          cachingKey: 'productsKey',
+          mockingData: Random().nextBool() ? {"products": productList} : productList,
+          // mockIt: true,
+        ),
+      );
 }
 
 const productList = [
@@ -52,7 +55,7 @@ const productList = [
   },
   {
     "id": 2,
-    "title": "iPhone X",
+    "title": "iPhone de Zahra",
     "description":
         "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...",
     "price": 899,

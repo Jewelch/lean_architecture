@@ -10,7 +10,7 @@ final class ProductDetailsScreen extends BlocProviderWidget<ProductDetailsBloc> 
       : super(
           dependencies: ProductScreenDependencies(),
           listenWhen: (previous, current) => true,
-          fullRebuildWhen: (_, currentState) => currentState is Loading,
+          fullRebuildWhen: (_, currentState) => false,
         );
 
   @override
@@ -25,7 +25,10 @@ final class ProductDetailsScreen extends BlocProviderWidget<ProductDetailsBloc> 
                 mainAxisAlignment: MainAxisAlignment.center,
                 spacing: 16,
                 children: [
-                  Text(state.message).center(),
+                  Text(
+                    state.message,
+                    textAlign: TextAlign.center,
+                  ),
                   ClearButton<ProductDetailsBloc>(),
                 ],
               ),
@@ -57,7 +60,7 @@ final class ProductDetailsScreen extends BlocProviderWidget<ProductDetailsBloc> 
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         floatingActionButton: ElevatedButton(
           child: const Text("Get product"),
-          onPressed: () => bloc.add(GetProduct("1")),
+          onPressed: () => bloc.add(GetProduct()),
         ).resize(width: 200, height: 45),
       );
 }

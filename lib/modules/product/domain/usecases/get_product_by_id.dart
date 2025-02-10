@@ -12,10 +12,8 @@ class GetProductByIdUC implements UseCase<Product, Params> {
   UseCaseResult<Product> call(Params params) async {
     try {
       return Right(Product.from(await dataSource.getProductById(params.id)));
-    } on CacheException {
-      return Left(CacheFailure());
-    } on ServerException {
-      return Left(ServerFailure());
+    } on CommonException catch (e) {
+      return Left(Failure(message: e.message));
     }
   }
 }

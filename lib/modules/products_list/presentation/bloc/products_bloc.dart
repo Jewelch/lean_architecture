@@ -18,11 +18,13 @@ final class ProductsBloc extends BaseBloc<ProductEvent, ProductState> {
     await getProductById.call(NoParams()).then(
           (value) => value.fold(
             (failure) => emit(
-              Error(message: failure.toString()),
+              Error(message: failure.message),
             ),
-            (List<Product>? products) => emit(
-              products == null ? Empty() : Success(products: products),
-            ),
+            (List<Product>? products) => products == null
+                ? emit(Empty())
+                : emit(
+                    Success(products: products),
+                  ),
           ),
         );
   }
