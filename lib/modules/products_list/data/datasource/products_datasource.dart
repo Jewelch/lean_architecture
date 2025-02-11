@@ -27,7 +27,7 @@ final class ProductsDataSourceImpl extends LeanRequesterConfig implements Produc
           path: "products",
           cachingKey: 'productsKey',
           mockingData: Random().nextBool() ? {"products": productList} : productList,
-          // mockIt: true,
+          mockIt: true,
         ),
       );
 }
