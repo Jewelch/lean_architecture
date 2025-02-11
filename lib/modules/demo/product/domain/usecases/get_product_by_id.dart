@@ -5,11 +5,8 @@ import '../../../common/models/product_model.dart';
 import '../../data/datasource/product_datasource.dart';
 
 class GetProductByIdUC extends SingleResultUseCase<Product, ProductModel, Params> {
-  final ProductDataSource dataSource;
-
-  GetProductByIdUC(
-    this.dataSource,
-  ) : super(
+  GetProductByIdUC(ProductDataSource dataSource)
+      : super(
           dataSourceEntry: (params) => dataSource.getProductById(params.id),
           modelToEntityMapper: Product.from,
         );

@@ -1,9 +1,11 @@
+import 'dart:math' show Random;
+
 import '../../../../../api/data_source.dart';
 import '../../../common/models/product_model.dart';
 
 part '../mock/products_mock.dart';
 
-abstract interface class ProductsDataSource {
+abstract interface class ProductsDataSource extends BaseDataSource {
   /// Calls the https://dummyjson.com/products endpoint.
   DataSourceListResult<ProductModel> getProducts();
 }
@@ -26,7 +28,7 @@ final class ProductsDataSourceImpl extends LeanRequesterConfig implements Produc
           method: RestfulMethods.get,
           path: "products",
           cachingKey: 'productsKey',
-          mockingData: true
+          mockingData: Random().nextBool()
               ? {
                   "products": _productList,
                 }
