@@ -2,7 +2,7 @@ import 'package:cg_core_defs/cg_core_defs.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_network_connectivity/flutter_network_connectivity.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:lean_requester/lean_interceptor.dart';
+import 'package:lean_requester/lean_requester.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'app/settings/app_settings.dart';

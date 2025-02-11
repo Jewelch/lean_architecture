@@ -1,4 +1,6 @@
-import 'package:lean_requester/lean_interceptor.dart';
+import 'dart:io' show Platform;
+
+import 'package:lean_requester/lean_requester.dart';
 
 import '../../base/screens/exports.dart';
 import '../top_bar/top_bar.dart';
@@ -112,9 +114,7 @@ class SmartScaffold extends StatelessWidget {
           body: isScrollable ? SingleChildScrollView(child: body) : body,
           floatingActionButton: floatingActionButton,
           floatingActionButtonLocation: floatingActionButtonLocation ??
-              (Platform.isIOS
-                  ? FloatingActionButtonLocation.endDocked
-                  : FloatingActionButtonLocation.endFloat),
+              (Platform.isIOS ? FloatingActionButtonLocation.endDocked : FloatingActionButtonLocation.endFloat),
           backgroundColor: backgroundColor,
           resizeToAvoidBottomInset: resizeToAvoidBottomInset,
           bottomNavigationBar: bottomNavigationBar ?? _BottomBar(bottomBarParent).visibleWhen(true),

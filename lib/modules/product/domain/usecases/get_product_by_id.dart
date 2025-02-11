@@ -1,4 +1,4 @@
-import 'package:lean_requester/lean_interceptor.dart';
+import 'package:lean_requester/lean_requester.dart';
 
 import '../../data/datasource/product_datasource.dart';
 import '../entities/product.dart';
