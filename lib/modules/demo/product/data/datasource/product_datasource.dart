@@ -20,7 +20,7 @@ final class ProductDataSourceImpl extends LeanRequesterConfig implements Product
         requirement: ProductModel(),
         method: RestfulMethods.get,
         path: "products/$id",
-        // mockingData: _mockProductData,
+        mockingData: _mockProductData,
         // mockIt: true,
       );
 }
