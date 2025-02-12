@@ -31,5 +31,5 @@ final class ProductsDataSourceImpl extends LeanRequesterConfig implements Produc
                 "products": _productList,
               }
             : _productList,
-      ).toFutureListOf<ProductModel>();
+      ).toListOf<ProductModel>();
 }
