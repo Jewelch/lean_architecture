@@ -3,7 +3,7 @@ import '../../../common/entities/product.dart';
 import '../../../common/models/product_model.dart';
 import '../../data/datasource/products_datasource.dart';
 
-class GetProductsUC extends ListResultUseCase<Product, ProductModel, NoParams> {
+class GetProductsUC extends UseCase<Product, ProductModel, List<Product>> {
   GetProductsUC(ProductsDataSource dataSource)
       : super(
           dataSourceFetcher: (_) => dataSource.getProducts(),
