@@ -1,11 +1,9 @@
-import 'dart:math' show Random;
-
 import '../../../../../api/data_source.dart';
 import '../../../common/models/product_model.dart';
 
 part '../mock/products_mock.dart';
 
-abstract interface class ProductsDataSource extends BaseDataSource {
+abstract interface class ProductsDataSource {
   /// Calls the https://dummyjson.com/products endpoint.
   DataSourceListResult<ProductModel> getProducts();
 }
@@ -18,22 +16,20 @@ final class ProductsDataSourceImpl extends LeanRequesterConfig implements Produc
   }) : super(client, cacheManager, connectivityMonitor);
 
   @override
-  DataSourceListResult<ProductModel> getProducts() async => await futureListOf<ProductModel>(
-        from: request(
-          requirements: (
-            dao: ProductModel(),
-            asList: true,
-            listKey: "products",
-          ),
-          method: RestfulMethods.get,
-          path: "products",
-          cachingKey: 'productsKey',
-          mockingData: Random().nextBool()
-              ? {
-                  "products": _productList,
-                }
-              : _productList,
-          mockIt: true,
+  DataSourceListResult<ProductModel> getProducts() async => request(
+        requirements: (
+          dao: ProductModel(),
+          asList: true,
+          listKey: "products",
         ),
-      );
+        method: RestfulMethods.get,
+        path: "products",
+        cachingKey: 'productsKey',
+        // mockIt: true,
+        mockingData: false
+            ? {
+                "products": _productList,
+              }
+            : _productList,
+      ).toFutureListOf<ProductModel>();
 }

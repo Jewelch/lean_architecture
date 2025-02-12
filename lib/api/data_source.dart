@@ -13,33 +13,25 @@ abstract base class LeanRequesterConfig extends LeanRequester {
     super.dio,
     super.cacheManager,
     super.connectivityMonitor,
-  );
-
-  @override
-  BaseOptions baseOptions = BaseOptions(
-    baseUrl: AppEnvironment.current.baseUrl,
-    connectTimeout: Duration(milliseconds: AppEnvironment.current.connectTimeout),
-    sendTimeout: Duration(milliseconds: AppEnvironment.current.sendTimeout),
-    receiveTimeout: Duration(milliseconds: AppEnvironment.current.receiveTimeout),
-    contentType: ContentType.json.mimeType,
-  );
-
-  @override
-  QueuedInterceptorsWrapper? queuedInterceptorsWrapper = QueuedInterceptorsWrapper(
-    onRequest: (options, handler) {
-      handler.next(options);
-    },
-    onResponse: (response, handler) {
-      handler.next(response);
-    },
-    onError: (error, handler) {
-      handler.next(error);
-    },
-  );
-
-  @override
-  int get maxRetriesPerRequest => 2;
-
-  @override
-  AuthenticationStrategy? get authenticationStrategy => JwtAuthentication();
+  ) : super(
+          authenticationStrategy: JwtAuthentication(),
+          baseOptions: BaseOptions(
+            baseUrl: AppEnvironment.current.baseUrl,
+            connectTimeout: Duration(milliseconds: AppEnvironment.current.connectTimeout),
+            sendTimeout: Duration(milliseconds: AppEnvironment.current.sendTimeout),
+            receiveTimeout: Duration(milliseconds: AppEnvironment.current.receiveTimeout),
+            contentType: ContentType.json.mimeType,
+          ),
+          commonHeaders: {
+            "language": 'Ar',
+          },
+          queuedInterceptorsWrapper: QueuedInterceptorsWrapper(
+            onRequest: (options, handler) => handler.next(options),
+            onResponse: (response, handler) => handler.next(response),
+            onError: (error, handler) => handler.next(error),
+          ),
+          maxRetriesPerRequest: 2,
+          debuggingEnabled: true,
+          logRequestHeaders: true,
+        );
 }
