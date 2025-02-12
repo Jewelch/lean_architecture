@@ -1,3 +1,4 @@
+import 'package:lean_architecture/base/screens/exports.dart';
 import 'package:lean_requester/models_exp.dart';
 
 import '../models/product_model.dart';
@@ -27,6 +28,7 @@ base class Product extends DTO {
         thumbnail: productModel.thumbnail ?? "",
       );
 
+  @protected
   @override
   List<Object?> get props => [title, description, price];
 }

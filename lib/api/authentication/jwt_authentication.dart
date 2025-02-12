@@ -4,14 +4,12 @@ import 'package:cg_core_defs/helpers/debugging_printer.dart';
 import 'package:lean_requester/lean_requester.dart';
 
 class JwtAuthentication extends AuthenticationStrategy {
-  JwtAuthentication();
-
   Map<String, dynamic> _cachedHeaders = {};
   DateTime? _tokenExpiry;
 
   @override
   Future<Map<String, dynamic>> getAuthorizationHeader() async {
-    Debugger.white('Actual time: ${DateTime.now().toLocal().toString().split(' ')[1].substring(0, 8)}');
+    Debugger.white('Actual time: ${toLocalTime(DateTime.now())}');
 
     if (_isTokenExpired()) {
       Debugger.red('Token expired. Generating a new token...');
@@ -22,7 +20,7 @@ class JwtAuthentication extends AuthenticationStrategy {
     } else {
       Debugger.green('Token is still valid. Current headers: $_cachedHeaders');
     }
-    Debugger.black('Token will expire at: ${_tokenExpiry?.toLocal().toString().split(' ')[1].substring(0, 8)}');
+    Debugger.black('Token will expire at: ${toLocalTime(_tokenExpiry)}');
 
     return _cachedHeaders;
   }
