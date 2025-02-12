@@ -6,7 +6,7 @@ import '../../data/datasource/products_datasource.dart';
 class GetProductsUC extends ListResultUseCase<Product, ProductModel, NoParams> {
   GetProductsUC(ProductsDataSource dataSource)
       : super(
-          dataSourceEntry: (_) => dataSource.getProducts(),
+          dataSourceFetcher: (_) => dataSource.getProducts(),
           modelToEntityMapper: Product.from,
         );
 }
