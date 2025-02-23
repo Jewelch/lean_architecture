@@ -8,7 +8,7 @@ abstract interface class ProductsDataSource {
   DataSourceListResult<ProductModel> getProducts();
 }
 
-final class ProductsDataSourceImpl extends LeanRequesterConfig implements ProductsDataSource {
+final class ProductsDataSourceImpl extends RestfulConsumer implements ProductsDataSource {
   ProductsDataSourceImpl({
     required Dio client,
     required CacheManager cacheManager,

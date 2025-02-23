@@ -1,4 +1,4 @@
-import '../../../../api/data_source.dart';
+import '../../../../api/data_source.dart' show FileOperationRequest, DownloadResult;
 import '../../domain/enums/pdf_size.dart';
 
 export '../implementation/download_datasource_impl.dart';
@@ -18,7 +18,7 @@ abstract interface class DownloadDataSource {
   ///
   /// Throws [ArgumentError] if [pdfFileSize] is not one of the available sizes
   Future<DownloadResult> downloadFile(
-    DownloadRequest request, {
+    FileOperationRequest request, {
     required PdfSize pdfSize,
   });
 }

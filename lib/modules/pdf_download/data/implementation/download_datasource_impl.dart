@@ -6,7 +6,7 @@ import '../definition/download_datasouce.dart';
 
 export '../definition/download_datasouce.dart';
 
-final class DownloadDataSourceImpl extends LeanRequesterConfig implements DownloadDataSource {
+final class DownloadDataSourceImpl extends FileDownloader implements DownloadDataSource {
   DownloadDataSourceImpl({
     required Dio client,
     required CacheManager cacheManager,
@@ -15,11 +15,11 @@ final class DownloadDataSourceImpl extends LeanRequesterConfig implements Downlo
 
   @override
   Future<DownloadResult> downloadFile(
-    DownloadRequest request, {
+    FileOperationRequest request, {
     required PdfSize pdfSize,
   }) async {
-    return await download(
-      configuration: DownloadConfiguration(
+    return await executeRequest(
+      DownloadConfiguration(
         urlPath: "https://link.testfile.org/PDF${pdfSize.size}MB",
         savePath: '${(await getApplicationDocumentsDirectory()).path}/sample_${pdfSize.label}.pdf',
         onReceiveProgress: request.onProgress,

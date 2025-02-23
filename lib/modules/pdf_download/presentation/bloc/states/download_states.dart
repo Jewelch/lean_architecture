@@ -3,9 +3,9 @@ import '../../../domain/entities/download_info.dart';
 import '../../../domain/enums/pdf_size.dart';
 
 sealed class DownloadStates extends Equatable {
-  final DownloadState state;
+  final FileOperationState state;
 
-  const DownloadStates({this.state = DownloadState.notStarted});
+  const DownloadStates({this.state = FileOperationState.notStarted});
 
   @override
   List<Object?> get props => [state];
@@ -25,9 +25,9 @@ final class DownloadSizeSelected extends DownloadStates {
 }
 
 final class DownloadProgressing extends DownloadStates {
-  final DownloadProgress progress;
+  final OperationProgress progress;
 
-  const DownloadProgressing(this.progress) : super(state: DownloadState.downloading);
+  const DownloadProgressing(this.progress) : super(state: FileOperationState.downloading);
 
   @override
   List<Object> get props => [progress, state];
@@ -36,7 +36,7 @@ final class DownloadProgressing extends DownloadStates {
 final class DownloadCompleted extends DownloadStates {
   final DownloadInfo downloadInfo;
 
-  const DownloadCompleted(this.downloadInfo) : super(state: DownloadState.completed);
+  const DownloadCompleted(this.downloadInfo) : super(state: FileOperationState.completed);
 
   @override
   List<Object> get props => [downloadInfo, state];
@@ -44,12 +44,12 @@ final class DownloadCompleted extends DownloadStates {
 
 final class DownloadFailed extends DownloadStates {
   final String message;
-  final DownloadError error;
+  final FileOperationError error;
 
   const DownloadFailed({
     required this.message,
-    this.error = DownloadError.unexpectedError,
-  }) : super(state: DownloadState.failed);
+    this.error = FileOperationError.unexpectedError,
+  }) : super(state: FileOperationState.failed);
 
   @override
   List<Object> get props => [message, error, state];

@@ -1,6 +1,6 @@
 import 'package:flutter/services.dart' show Clipboard, ClipboardData;
 
-import '../../../../api/data_source.dart' show DownloadProgress;
+import '../../../../api/data_source.dart';
 import '../../../../base/screens/exports.dart';
 import '../../binding/download_screen_deps.dart';
 import '../../domain/entities/download_info.dart';

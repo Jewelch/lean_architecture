@@ -1,3 +1,5 @@
+import 'package:lean_architecture/api/data_source.dart';
+
 import '../../../../base/bloc/exports.dart';
 import '../../domain/enums/pdf_size.dart';
 import '../../domain/usecases/download_file_uc.dart';
@@ -31,8 +33,8 @@ final class DownloadBloc extends BaseBloc<DownloadEvents, DownloadStates> {
     _cancelToken = CancelToken();
 
     final result = await _downloadFileUC(
-      DownloadParams(
-        request: DownloadRequest(
+      DownloadUseCaseParams(
+        request: FileOperationRequest(
           cancelToken: _cancelToken,
           onProgress: (progress) {
             emit(DownloadProgressing(progress));

@@ -6,7 +6,7 @@ class _DownloadProgressing extends StatelessWidget {
     required this.onCancel,
   });
 
-  final DownloadProgress progress;
+  final OperationProgress progress;
   final VoidCallback? onCancel;
 
   @override
@@ -19,7 +19,7 @@ class _DownloadProgressing extends StatelessWidget {
               SizedBox.square(
                 dimension: 70,
                 child: CircularProgressIndicator(
-                  value: progress.intPercentage,
+                  value: progress.percentage,
                   strokeWidth: 5,
                   backgroundColor: Colors.grey.shade200,
                 ),

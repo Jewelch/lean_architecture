@@ -8,30 +8,16 @@ export 'package:cg_core_defs/cg_core_defs.dart' show CacheManager, ConnectivityM
 export 'package:lean_requester/datasource_exp.dart';
 export 'package:lean_requester/models_exp.dart';
 
-abstract base class LeanRequesterConfig extends LeanRequester {
-  LeanRequesterConfig(
-    super.dio,
-    super.cacheManager,
-    super.connectivityMonitor,
-  ) : super(
-          authenticationStrategy: JwtAuthentication(),
-          baseOptions: BaseOptions(
-            baseUrl: AppEnvironment.current.baseUrl,
-            connectTimeout: Duration(milliseconds: AppEnvironment.current.connectTimeout),
-            sendTimeout: Duration(milliseconds: AppEnvironment.current.sendTimeout),
-            receiveTimeout: Duration(milliseconds: AppEnvironment.current.receiveTimeout),
-            contentType: ContentType.json.mimeType,
-          ),
-          commonHeaders: {
-            "language": 'Ar',
-          },
-          queuedInterceptorsWrapper: QueuedInterceptorsWrapper(
-            onRequest: (options, handler) => handler.next(options),
-            onResponse: (response, handler) => handler.next(response),
-            onError: (error, handler) => handler.next(error),
-          ),
-          maxRetriesPerRequest: 2,
-          debuggingEnabled: true,
-          logRequestHeaders: true,
-        );
+part 'config/requester_config.dart';
+
+abstract base class RestfulConsumer extends _RequesterConfig with RestfulMixin {
+  RestfulConsumer(super.dio, super.cacheManager, super.connectivityMonitor);
+}
+
+abstract base class FileDownloader extends _RequesterConfig with DownloadMixin {
+  FileDownloader(super.dio, super.cacheManager, super.connectivityMonitor);
+}
+
+abstract base class FileUploader extends _RequesterConfig with UploadMixin {
+  FileUploader(super.dio, super.cacheManager, super.connectivityMonitor);
 }
