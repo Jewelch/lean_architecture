@@ -1,15 +1,14 @@
-import '../../../../../base/bloc/exports.dart';
+import '../../../../base/bloc/exports.dart';
 import '../../domain/enums/pdf_size.dart';
 import '../../domain/usecases/download_file_uc.dart';
-import 'download_events.dart';
-import 'download_states.dart';
+import 'events/download_events.dart';
+import 'states/download_states.dart';
 
 final class DownloadBloc extends BaseBloc<DownloadEvents, DownloadStates> {
   final DownloadFileUC _downloadFileUC;
   CancelToken? _cancelToken;
   PdfSize _selectedSize = PdfSize.mb10;
 
-  // Public getter for UI
   PdfSize get selectedSize => _selectedSize;
 
   DownloadBloc(this._downloadFileUC) : super(const DownloadSizeSelected(PdfSize.mb10)) {

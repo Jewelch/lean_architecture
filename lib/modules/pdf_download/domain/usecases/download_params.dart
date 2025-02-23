@@ -1,4 +1,4 @@
-import '../../../../../api/data_source.dart' show DownloadRequest, Equatable;
+import '../../../../api/data_source.dart' show DownloadRequest, Equatable;
 import '../enums/pdf_size.dart';
 
 class DownloadParams extends Equatable {

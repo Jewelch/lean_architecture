@@ -2,12 +2,12 @@ import 'package:flutter/services.dart' show Clipboard, ClipboardData;
 
 import '../../../../api/data_source.dart' show DownloadProgress;
 import '../../../../base/screens/exports.dart';
-import '../domain/entities/download_info.dart';
-import '../domain/enums/pdf_size.dart';
-import '../download_screen_deps.dart';
-import 'bloc/download_bloc.dart';
-import 'bloc/download_events.dart';
-import 'bloc/download_states.dart';
+import '../../binding/download_screen_deps.dart';
+import '../../domain/entities/download_info.dart';
+import '../../domain/enums/pdf_size.dart';
+import '../bloc/download_bloc.dart';
+import '../bloc/events/download_events.dart';
+import '../bloc/states/download_states.dart';
 
 part 'widgets/download_completed.dart';
 part 'widgets/download_failed.dart';
@@ -21,7 +21,7 @@ final class DownloadScreen extends BlocProviderWidget<DownloadBloc> {
 
   @override
   Widget build(BuildContext context) => SmartScaffold(
-        bottomBarParent: BottomBarParents.none,
+        bottomBarParent: BottomBarParents.pdf,
         title: 'File Download',
         body: BlocBuilder<DownloadBloc, DownloadStates>(
           builder: (context, state) => Column(
@@ -63,6 +63,7 @@ final class DownloadScreen extends BlocProviderWidget<DownloadBloc> {
             ],
           ),
         ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         floatingActionButton: BlocBuilder<DownloadBloc, DownloadStates>(
           builder: (context, state) => state is! DownloadProgressing
               ? FloatingActionButton.extended(

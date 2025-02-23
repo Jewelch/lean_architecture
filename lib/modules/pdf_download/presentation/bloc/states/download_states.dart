@@ -1,6 +1,6 @@
 import '../../../../../api/data_source.dart';
-import '../../domain/entities/download_info.dart';
-import '../../domain/enums/pdf_size.dart';
+import '../../../domain/entities/download_info.dart';
+import '../../../domain/enums/pdf_size.dart';
 
 sealed class DownloadStates extends Equatable {
   final DownloadState state;

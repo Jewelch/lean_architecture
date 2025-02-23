@@ -1,7 +1,7 @@
-import '../../../../../api/data_source.dart';
+import '../../../../api/data_source.dart';
 import '../../domain/enums/pdf_size.dart';
 
-export '../datasource/download_datasource_impl.dart';
+export '../implementation/download_datasource_impl.dart';
 
 abstract interface class DownloadDataSource {
   /// Downloads a sample PDF file from TestFile.org service

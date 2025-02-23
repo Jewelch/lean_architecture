@@ -1,10 +1,10 @@
 import 'package:path_provider/path_provider.dart';
 
-import '../../../../../api/data_source.dart';
+import '../../../../api/data_source.dart';
 import '../../domain/enums/pdf_size.dart';
-import '../interface/download_datasouce.dart';
+import '../definition/download_datasouce.dart';
 
-export '../interface/download_datasouce.dart';
+export '../definition/download_datasouce.dart';
 
 final class DownloadDataSourceImpl extends LeanRequesterConfig implements DownloadDataSource {
   DownloadDataSourceImpl({

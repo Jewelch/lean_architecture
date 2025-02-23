@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-import '../../domain/enums/pdf_size.dart';
+import '../../../domain/enums/pdf_size.dart';
 
 sealed class DownloadEvents extends Equatable {
   const DownloadEvents();
