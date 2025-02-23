@@ -18,7 +18,7 @@ final class CancelDownload extends DownloadEvents {
 }
 
 final class UpdateSelectedSize extends DownloadEvents {
-  final PdfSize size;
+  final PdfSize? size;
 
   const UpdateSelectedSize(this.size);
 

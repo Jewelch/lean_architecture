@@ -12,6 +12,7 @@ import '../bloc/states/download_states.dart';
 part 'widgets/download_completed.dart';
 part 'widgets/download_failed.dart';
 part 'widgets/download_progressing.dart';
+part 'widgets/size_dropdown.dart';
 
 final class DownloadScreen extends BlocProviderWidget<DownloadBloc> {
   DownloadScreen({super.key})
@@ -27,24 +28,11 @@ final class DownloadScreen extends BlocProviderWidget<DownloadBloc> {
           builder: (context, state) => Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              if (state is! DownloadProgressing) ...[
-                DropdownButton<PdfSize>(
-                  dropdownColor: Colors.grey.shade300,
-                  isDense: true,
-                  menuMaxHeight: 300,
-                  value: state is DownloadSizeSelected ? state.selectedSize : bloc.selectedSize,
-                  items: PdfSize.values
-                      .map((size) => DropdownMenuItem(
-                            value: size,
-                            child: Text('Download ${size.label} PDF'),
-                          ))
-                      .toList(),
-                  onChanged: (size) {
-                    if (size != null) bloc.add(UpdateSelectedSize(size));
-                  },
-                ).overallPadding(20),
-                const SizedBox(height: 20),
-              ],
+              if (state is! DownloadProgressing)
+                _SizeDropDown(
+                  size: state is DownloadSizeSelected ? state.selectedSize : bloc.selectedSize,
+                  onChanged: (size) => bloc.add(UpdateSelectedSize(size)),
+                ),
               Center(
                 child: switch (state) {
                   DownloadInitial() => const SizedBox(),

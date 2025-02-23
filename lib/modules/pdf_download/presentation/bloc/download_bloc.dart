@@ -18,7 +18,7 @@ final class DownloadBloc extends BaseBloc<DownloadEvents, DownloadStates> {
   }
 
   void _handleUpdateSelectedSize(UpdateSelectedSize event, Emitter<DownloadStates> emit) {
-    _selectedSize = event.size;
+    _selectedSize = event.size ?? _selectedSize;
     if (state is! DownloadProgressing) {
       emit(DownloadSizeSelected(_selectedSize));
     }
