@@ -43,6 +43,7 @@ class AppWidget extends StatelessWidget {
                 children: [
                   Expanded(
                     child: [
+                      DownloadScreen(),
                       ProductDetailsScreen(),
                       // ProductDetailsScreen(),
                       ProductsScreen(),
