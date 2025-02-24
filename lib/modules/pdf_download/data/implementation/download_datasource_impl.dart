@@ -17,15 +17,14 @@ final class DownloadDataSourceImpl extends FileDownloader implements DownloadDat
   Future<DownloadResult> downloadFile(
     FileOperationRequest request, {
     required PdfSize pdfSize,
-  }) async {
-    return await executeRequest(
-      DownloadConfiguration(
-        urlPath: "https://link.testfile.org/PDF${pdfSize.size}MB",
-        savePath: '${(await getApplicationDocumentsDirectory()).path}/sample_${pdfSize.label}.pdf',
-        onReceiveProgress: request.onProgress,
-        cancelToken: request.cancelToken,
-        debugIt: true,
-      ),
-    );
-  }
+  }) async =>
+      await executeRequest(
+        DownloadConfiguration(
+          urlPath: "${DownloadDataSource.pdfDownloadUrl}${pdfSize.size}MB",
+          savePath: '${(await getApplicationDocumentsDirectory()).path}/sample_${pdfSize.label}.pdf',
+          onProgress: request.onProgress,
+          cancelToken: request.cancelToken,
+          debugIt: true,
+        ),
+      );
 }

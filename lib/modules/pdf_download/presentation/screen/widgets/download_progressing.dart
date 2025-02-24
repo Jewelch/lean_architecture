@@ -1,13 +1,9 @@
 part of '../download_screen.dart';
 
-class _DownloadProgressing extends StatelessWidget {
-  const _DownloadProgressing({
-    required this.progress,
-    required this.onCancel,
-  });
+class _DownloadProgressing<B extends Bloc> extends StatelessWidget {
+  const _DownloadProgressing({required this.progress});
 
-  final OperationProgress progress;
-  final VoidCallback? onCancel;
+  final (int, int) progress;
 
   @override
   Widget build(BuildContext context) => Column(
@@ -39,13 +35,12 @@ class _DownloadProgressing extends StatelessWidget {
             style: const TextStyle(fontSize: 16),
           ),
           const SizedBox(height: 30),
-          if (onCancel != null)
-            FloatingActionButton.extended(
-              onPressed: onCancel,
-              backgroundColor: AppColors.error,
-              label: const Text('Cancel Download'),
-              icon: const Icon(Icons.cancel_outlined),
-            ),
+          FloatingActionButton.extended(
+            onPressed: () => BlocProvider.of<B>(context).add(const CancelDownload()),
+            backgroundColor: AppColors.error,
+            label: const Text('Cancel Download'),
+            icon: const Icon(Icons.cancel_outlined),
+          ),
         ],
       );
 }

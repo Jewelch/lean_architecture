@@ -4,6 +4,8 @@ import '../../domain/enums/pdf_size.dart';
 export '../implementation/download_datasource_impl.dart';
 
 abstract interface class DownloadDataSource {
+  static const pdfDownloadUrl = 'https://link.testfile.org/PDF';
+
   /// Downloads a sample PDF file from TestFile.org service
   ///
   /// Available PDF sizes: 10MB, 20MB, 30MB, 40MB, 50MB, 100MB

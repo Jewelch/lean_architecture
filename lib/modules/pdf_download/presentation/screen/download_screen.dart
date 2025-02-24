@@ -1,6 +1,6 @@
 import 'package:flutter/services.dart' show Clipboard, ClipboardData;
+import 'package:lean_architecture/api/data_source.dart';
 
-import '../../../../api/data_source.dart';
 import '../../../../base/screens/exports.dart';
 import '../../binding/download_screen_deps.dart';
 import '../../domain/entities/download_info.dart';
@@ -28,24 +28,13 @@ final class DownloadScreen extends BlocProviderWidget<DownloadBloc> {
           builder: (context, state) => Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              if (state is! DownloadProgressing)
-                _SizeDropDown(
-                  size: state is DownloadSizeSelected ? state.selectedSize : bloc.selectedSize,
-                  onChanged: (size) => bloc.add(UpdateSelectedSize(size)),
-                ),
+              if (state is! DownloadProgressing) _SizeDropDown<DownloadBloc>(state),
               Center(
                 child: switch (state) {
-                  DownloadInitial() => const SizedBox(),
-                  DownloadSizeSelected() => const SizedBox(),
-                  DownloadProgressing(progress: final progress) => _DownloadProgressing(
-                      progress: progress,
-                      onCancel: () => bloc.add(const CancelDownload()),
-                    ),
-                  DownloadFailed(message: final message) => _DownloadFailed(
-                      message: message,
-                      onRetry: () => bloc.add(const StartDownload()),
-                    ),
-                  DownloadCompleted(downloadInfo: final info) => _DownloadCompleted(info: info),
+                  DownloadProgressing() => _DownloadProgressing<DownloadBloc>(progress: state.progress),
+                  DownloadFailed() => _DownloadFailed<DownloadBloc>(message: state.message),
+                  DownloadCompleted() => _DownloadCompleted(info: state.downloadInfo),
+                  _ => const SizedBox(),
                 },
               ),
             ],

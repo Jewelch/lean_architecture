@@ -1,13 +1,9 @@
 part of '../download_screen.dart';
 
-class _DownloadFailed extends StatelessWidget {
-  const _DownloadFailed({
-    required this.message,
-    required this.onRetry,
-  });
+class _DownloadFailed<B extends Bloc> extends StatelessWidget {
+  const _DownloadFailed({required this.message});
 
   final String message;
-  final VoidCallback? onRetry;
 
   @override
   Widget build(BuildContext context) => Column(
@@ -24,13 +20,12 @@ class _DownloadFailed extends StatelessWidget {
             style: const TextStyle(fontSize: 16),
           ).overallPadding(),
           const SizedBox(height: 15),
-          if (onRetry != null)
-            FloatingActionButton.extended(
-              onPressed: onRetry,
-              backgroundColor: AppColors.warning,
-              label: const Text('Retry'),
-              icon: const Icon(Icons.refresh),
-            ),
+          FloatingActionButton.extended(
+            onPressed: () => BlocProvider.of<B>(context).add(const StartDownload()),
+            backgroundColor: AppColors.warning,
+            label: const Text('Retry'),
+            icon: const Icon(Icons.refresh),
+          ),
         ],
       );
 }

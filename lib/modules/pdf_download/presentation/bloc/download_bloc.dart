@@ -36,9 +36,7 @@ final class DownloadBloc extends BaseBloc<DownloadEvents, DownloadStates> {
       DownloadUseCaseParams(
         request: FileOperationRequest(
           cancelToken: _cancelToken,
-          onProgress: (progress) {
-            emit(DownloadProgressing(progress));
-          },
+          onProgress: (progress, total) => emit(DownloadProgressing((progress, total))),
         ),
         pdfSize: _selectedSize,
       ),

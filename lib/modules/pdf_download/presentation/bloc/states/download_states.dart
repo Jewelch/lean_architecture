@@ -25,7 +25,7 @@ final class DownloadSizeSelected extends DownloadStates {
 }
 
 final class DownloadProgressing extends DownloadStates {
-  final OperationProgress progress;
+  final (int, int) progress;
 
   const DownloadProgressing(this.progress) : super(state: FileOperationState.downloading);
 
