@@ -1,5 +1,4 @@
 import '../../../../api/data_source.dart';
-import '../../domain/enums/file_type.dart';
 import '../definition/upload_datasource.dart';
 import '../models/upload_response_model.dart';
 
@@ -14,7 +13,6 @@ final class UploadDataSourceImpl extends FileUploader implements UploadDataSourc
   Future<UploadResult> uploadFile(
     FileOperationRequest request, {
     required String filePath,
-    required FileType fileType,
   }) async =>
       await executeRequest(
         UploadConfiguration(

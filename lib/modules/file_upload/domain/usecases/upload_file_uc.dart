@@ -3,7 +3,6 @@ import 'package:lean_requester/usecase_exp.dart';
 import '../../data/definition/upload_datasource.dart';
 import '../../data/models/upload_response_model.dart';
 import '../entities/upload_info.dart';
-import '../enums/file_type.dart';
 
 class UploadFileUC {
   final UploadDataSource _dataSource;
@@ -14,7 +13,6 @@ class UploadFileUC {
       .uploadFile(
         params.request,
         filePath: params.filePath,
-        fileType: params.fileType,
       )
       .then((result) => result.fold(
             (failure) => Left(failure),
@@ -25,14 +23,12 @@ class UploadFileUC {
 class UploadUseCaseParams extends Equatable {
   final FileOperationRequest request;
   final String filePath;
-  final FileType fileType;
 
   const UploadUseCaseParams({
     required this.request,
     required this.filePath,
-    required this.fileType,
   });
 
   @override
-  List<Object?> get props => [request, filePath, fileType];
+  List<Object?> get props => [request, filePath];
 }

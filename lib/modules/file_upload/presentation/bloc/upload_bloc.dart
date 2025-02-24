@@ -1,41 +1,52 @@
 import 'package:file_picker/file_picker.dart' as picker;
+import 'package:image_picker/image_picker.dart' as image_picker;
+import 'package:lean_architecture/app/app_widget.dart';
 
 import '../../../../api/data_source.dart' show CancelToken, FileOperationRequest;
 import '../../../../base/bloc/exports.dart';
 import '../../domain/enums/file_type.dart';
 import '../../domain/usecases/upload_file_uc.dart';
+import '../screen/widgets/source_picker_sheet.dart';
 import 'events/upload_events.dart';
 import 'states/upload_states.dart';
 
 final class UploadBloc extends BaseBloc<UploadEvents, UploadStates> {
   final UploadFileUC _uploadFileUC;
   CancelToken? _cancelToken;
-  FileType _selectedType = FileType.pdf;
-
-  FileType get selectedType => _selectedType;
 
   UploadBloc(this._uploadFileUC) : super(const UploadTypeSelected(FileType.pdf)) {
     on<StartUpload>(_handleStartUpload);
     on<CancelUpload>(_handleCancelUpload);
-    on<UpdateSelectedType>(_handleUpdateSelectedType);
     on<PickAndUploadFile>(_handlePickAndUploadFile);
-  }
-
-  void _handleUpdateSelectedType(UpdateSelectedType event, Emitter<UploadStates> emit) {
-    _selectedType = event.type ?? _selectedType;
-    if (state is! UploadProgressing) {
-      emit(UploadTypeSelected(_selectedType));
-    }
+    on<ShowPickerOptions>(_handleShowPickerOptions);
   }
 
   Future<void> _handlePickAndUploadFile(PickAndUploadFile event, Emitter<UploadStates> emit) async {
-    final result = await picker.FilePicker.platform.pickFiles(
-      type: picker.FileType.custom,
-      allowedExtensions: ['pdf', 'doc', 'docx', 'jpg', 'jpeg', 'png'],
-    );
+    String? filePath;
 
-    if (result != null) {
-      add(StartUpload(result.files.single.path!));
+    switch (event.source) {
+      case PickerSource.gallery:
+        final image = await image_picker.ImagePicker().pickImage(
+          source: image_picker.ImageSource.gallery,
+        );
+        filePath = image?.path;
+
+      case PickerSource.camera:
+        final image = await image_picker.ImagePicker().pickImage(
+          source: image_picker.ImageSource.camera,
+        );
+        filePath = image?.path;
+
+      case PickerSource.document:
+        final result = await picker.FilePicker.platform.pickFiles(
+          type: picker.FileType.custom,
+          allowedExtensions: ['pdf', 'doc', 'docx', 'jpg', 'jpeg', 'png'],
+        );
+        filePath = result?.files.single.path;
+    }
+
+    if (filePath != null) {
+      add(StartUpload(filePath));
     }
   }
 
@@ -49,7 +60,6 @@ final class UploadBloc extends BaseBloc<UploadEvents, UploadStates> {
           onProgress: (progress, total) => emit(UploadProgressing((progress, total))),
         ),
         filePath: event.filePath,
-        fileType: _selectedType,
       ),
     );
 
@@ -62,7 +72,13 @@ final class UploadBloc extends BaseBloc<UploadEvents, UploadStates> {
   void _handleCancelUpload(CancelUpload event, Emitter<UploadStates> emit) {
     _cancelToken?.cancel('Upload cancelled by user');
     _cancelToken = null;
-    emit(UploadTypeSelected(_selectedType));
+  }
+
+  void _handleShowPickerOptions(ShowPickerOptions event, Emitter<UploadStates> emit) {
+    SourcePickerSheet.show(
+      AppWidget.globalContext!,
+      (source) => add(PickAndUploadFile(source)),
+    );
   }
 
   @override

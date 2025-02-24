@@ -21,14 +21,14 @@ final class CancelUpload extends UploadEvents {
   const CancelUpload();
 }
 
-final class UpdateSelectedType extends UploadEvents {
-  final FileType? type;
-  const UpdateSelectedType(this.type);
-
-  @override
-  List<Object?> get props => [type];
+final class ShowPickerOptions extends UploadEvents {
+  const ShowPickerOptions();
 }
 
 final class PickAndUploadFile extends UploadEvents {
-  const PickAndUploadFile();
+  final PickerSource source;
+  const PickAndUploadFile(this.source);
+
+  @override
+  List<Object?> get props => [source];
 }

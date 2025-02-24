@@ -1,5 +1,4 @@
 import '../../../../api/data_source.dart' show FileOperationRequest, UploadResult;
-import '../../domain/enums/file_type.dart';
 
 export '../implementation/upload_datasource_impl.dart';
 
@@ -15,6 +14,5 @@ abstract interface class UploadDataSource {
   Future<UploadResult> uploadFile(
     FileOperationRequest request, {
     required String filePath,
-    required FileType fileType,
   });
 }

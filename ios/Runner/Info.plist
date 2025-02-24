@@ -23,7 +23,7 @@
 		<key>CFBundleVersion</key>
 		<string>$(FLUTTER_BUILD_NUMBER)</string>
 		<key>LSRequiresIPhoneOS</key>
-		<true/>
+		<true />
 		<key>UILaunchStoryboardName</key>
 		<string>LaunchScreen</string>
 		<key>UIMainStoryboardFile</key>
@@ -42,9 +42,9 @@
 			<string>UIInterfaceOrientationLandscapeRight</string>
 		</array>
 		<key>CADisableMinimumFrameDurationOnPhone</key>
-		<true/>
+		<true />
 		<key>UIApplicationSupportsIndirectInputEvents</key>
-		<true/>
+		<true />
 		<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 		<string>We monitor the location of the driver before and during the ride in order to update riders and ensure safety. We also use your location to connect you with on-demand rides more efficiently</string>
 		<key>NSLocationAlwaysUsageDescription</key>
@@ -63,8 +63,18 @@
 			</dict>
 		</array>
 		<key>FlutterDeepLinkingEnabled</key>
-		<true/>
+		<true />
 		<key>UIStatusBarHidden</key>
-		<false/>
+		<false />
+		<key>NSCameraUsageDescription</key>
+		<string>We need access to your camera to take photos for uploading.</string>
+		<key>NSPhotoLibraryUsageDescription</key>
+		<string>We need access to your photo library to select photos for uploading.</string>
+		<key>NSMicrophoneUsageDescription</key>
+		<string>We need access to your microphone for videos with sound.</string>
+		<key>UISupportsDocumentBrowser</key>
+		<true />
+		<key>LSSupportsOpeningDocumentsInPlace</key>
+		<true />
 	</dict>
 </plist>

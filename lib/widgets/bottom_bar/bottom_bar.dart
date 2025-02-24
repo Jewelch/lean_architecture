@@ -1,13 +1,11 @@
 part of '../scaffold/smart_scaffold.dart';
 
 enum BottomBarParents {
-  none,
   product,
   list,
   location,
   download,
   upload,
-  profile,
 }
 
 final class _BottomBar extends StatelessWidget {
@@ -16,45 +14,42 @@ final class _BottomBar extends StatelessWidget {
   final BottomBarParents bottomBarParents;
 
   @override
-  Widget build(BuildContext context) => switch (bottomBarParents) {
-        BottomBarParents.none => const SizedBox.shrink(),
-        _ => Card(
-            elevation: AppConstants.bottomBar.elevation - 5,
-            color: AppColors.greyBackground,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: _homeChildren
-                  .map(
-                    (module) => IconButton(
-                      style: IconButton.styleFrom(padding: EdgeInsets.zero),
-                      onPressed: module.onPressed,
-                      icon: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          module.iconOrImage.isLeft()
-                              ? Icon(
-                                  module.iconOrImage.left!,
-                                  size: AppConstants.bottomBar.imageHeight,
-                                  color: _color(module.index),
-                                )
-                              : Image.asset(
-                                  module.iconOrImage.right!,
-                                  fit: BoxFit.cover,
-                                  height: AppConstants.bottomBar.imageHeight,
-                                  color: _color(module.index),
-                                ).customPadding(top: 1),
-                          Text(
-                            module.title,
-                            style: AppFonts.nunito.withSize(FontSizes.subtitle).withColor(_color(module.index)),
-                          ).customPadding(top: 3),
-                        ],
-                      ),
-                    ).expanded(),
-                  )
-                  .toList(),
-            ),
-          ).overallPadding(10).resize(height: AppConstants.bottomBar.height),
-      };
+  Widget build(BuildContext context) => Card(
+        elevation: AppConstants.bottomBar.elevation - 5,
+        color: AppColors.greyBackground,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: _homeChildren
+              .map(
+                (module) => IconButton(
+                  style: IconButton.styleFrom(padding: EdgeInsets.zero),
+                  onPressed: module.onPressed,
+                  icon: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      module.iconOrImage.isLeft()
+                          ? Icon(
+                              module.iconOrImage.left!,
+                              size: AppConstants.bottomBar.imageHeight,
+                              color: _color(module.index),
+                            )
+                          : Image.asset(
+                              module.iconOrImage.right!,
+                              fit: BoxFit.cover,
+                              height: AppConstants.bottomBar.imageHeight,
+                              color: _color(module.index),
+                            ).customPadding(top: 1),
+                      Text(
+                        module.title,
+                        style: AppFonts.nunito.withSize(FontSizes.subtitle).withColor(_color(module.index)),
+                      ).customPadding(top: 3),
+                    ],
+                  ),
+                ).expanded(),
+              )
+              .toList(),
+        ),
+      ).overallPadding(10).resize(height: AppConstants.bottomBar.height);
 
   Color _color(index) => switch (bottomBarParents) {
             BottomBarParents.product => 0,
@@ -62,8 +57,6 @@ final class _BottomBar extends StatelessWidget {
             BottomBarParents.location => 2,
             BottomBarParents.download => 3,
             BottomBarParents.upload => 4,
-            BottomBarParents.profile => 5,
-            BottomBarParents.none => -1,
           } ==
           index
       ? AppColors.secondary
@@ -99,12 +92,6 @@ final List<_PageModel> _homeChildren = [
     index: 4,
     title: 'Upload',
     iconOrImage: const Left(Icons.upload),
-    onPressed: () {},
-  ),
-  _PageModel(
-    index: 5,
-    title: 'Profile',
-    iconOrImage: const Left(Icons.person),
     onPressed: () {},
   ),
 ];
