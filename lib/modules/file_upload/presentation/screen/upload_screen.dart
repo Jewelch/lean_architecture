@@ -1,16 +1,15 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 
 import '../../../../base/screens/exports.dart';
 import '../../binding/upload_screen_deps.dart';
 import '../../domain/entities/upload_info.dart';
-import '../../domain/enums/file_type.dart';
 import '../bloc/events/upload_events.dart';
 import '../bloc/states/upload_states.dart';
 import '../bloc/upload_bloc.dart';
 
 part 'widgets/upload_completed.dart';
 part 'widgets/upload_failed.dart';
+part 'widgets/upload_message.dart';
 part 'widgets/upload_progressing.dart';
 
 final class UploadScreen extends BlocProviderWidget<UploadBloc> {
@@ -28,7 +27,9 @@ final class UploadScreen extends BlocProviderWidget<UploadBloc> {
             UploadProgressing() => _UploadProgressing<UploadBloc>(progress: state.progress),
             UploadFailed() => _UploadFailed<UploadBloc>(message: state.message),
             UploadCompleted() => _UploadCompleted(info: state.uploadInfo),
-            _ => const SizedBox(),
+            Idle() => const _UploadMessage(
+                message: 'Click the button below to select a file source\nand start uploading',
+              ),
           }
               .center(),
         ),
@@ -36,37 +37,11 @@ final class UploadScreen extends BlocProviderWidget<UploadBloc> {
         floatingActionButton: BlocBuilder<UploadBloc, UploadStates>(
           builder: (context, state) => state is! UploadProgressing
               ? FloatingActionButton.extended(
-                  onPressed: () => _showPickerOptions(context),
-                  label: Text('Select picking source'),
+                  onPressed: () => bloc.add(const ShowPickerOptions()),
+                  label: const Text('Select picking source'),
                   icon: const Icon(Icons.upload),
                 )
               : const SizedBox(),
         ),
       );
-
-  void _showPickerOptions(BuildContext context) {
-    showCupertinoModalPopup<void>(
-      context: context,
-      builder: (BuildContext context) => CupertinoActionSheet(
-        title: const Text('Choose Upload Source'),
-        message: const Text('Select where to pick the file from'),
-        actions: PickerSource.values
-            .map(
-              (source) => CupertinoActionSheetAction(
-                onPressed: () {
-                  Navigator.pop(context);
-                  bloc.add(PickAndUploadFile(source));
-                },
-                child: Text(source.label),
-              ),
-            )
-            .toList(),
-        cancelButton: CupertinoActionSheetAction(
-          isDestructiveAction: true,
-          onPressed: () => Navigator.pop(context),
-          child: const Text('Cancel'),
-        ),
-      ),
-    );
-  }
 }

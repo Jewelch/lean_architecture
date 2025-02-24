@@ -22,13 +22,6 @@ final class UploadDataSourceImpl extends FileUploader implements UploadDataSourc
           onProgress: request.onProgress,
           cancelToken: request.cancelToken,
           debugIt: true,
-          // mockResponse: {
-          //   'url': 'https://cdn.example.com/files/${DateTime.now().millisecondsSinceEpoch}',
-          //   'name': filePath.split('/').last,
-          //   'size': await File(filePath).length(),
-          //   'type': fileType.endpoint,
-          //   'uploaded_at': DateTime.now().toIso8601String(),
-          // },
         ),
       );
 }

@@ -14,7 +14,7 @@ final class UploadBloc extends BaseBloc<UploadEvents, UploadStates> {
   final UploadFileUC _uploadFileUC;
   CancelToken? _cancelToken;
 
-  UploadBloc(this._uploadFileUC) : super(const UploadTypeSelected(FileType.pdf)) {
+  UploadBloc(this._uploadFileUC) : super(Idle()) {
     on<StartUpload>(_handleStartUpload);
     on<CancelUpload>(_handleCancelUpload);
     on<PickAndUploadFile>(_handlePickAndUploadFile);
