@@ -1,6 +1,14 @@
 part of '../scaffold/smart_scaffold.dart';
 
-enum BottomBarParents { none, product, list, location, pdf, profile }
+enum BottomBarParents {
+  none,
+  product,
+  list,
+  location,
+  download,
+  upload,
+  profile,
+}
 
 final class _BottomBar extends StatelessWidget {
   const _BottomBar(this.bottomBarParents);
@@ -52,8 +60,9 @@ final class _BottomBar extends StatelessWidget {
             BottomBarParents.product => 0,
             BottomBarParents.list => 1,
             BottomBarParents.location => 2,
-            BottomBarParents.pdf => 3,
-            BottomBarParents.profile => 4,
+            BottomBarParents.download => 3,
+            BottomBarParents.upload => 4,
+            BottomBarParents.profile => 5,
             BottomBarParents.none => -1,
           } ==
           index
@@ -82,12 +91,18 @@ final List<_PageModel> _homeChildren = [
   ),
   _PageModel(
     index: 3,
-    title: 'PDF',
-    iconOrImage: const Left(Icons.picture_as_pdf),
+    title: 'Download',
+    iconOrImage: const Left(Icons.download),
     onPressed: () {},
   ),
   _PageModel(
     index: 4,
+    title: 'Upload',
+    iconOrImage: const Left(Icons.upload),
+    onPressed: () {},
+  ),
+  _PageModel(
+    index: 5,
     title: 'Profile',
     iconOrImage: const Left(Icons.person),
     onPressed: () {},

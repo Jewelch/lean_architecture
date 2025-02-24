@@ -22,7 +22,7 @@ final class DownloadScreen extends BlocProviderWidget<DownloadBloc> {
 
   @override
   Widget build(BuildContext context) => SmartScaffold(
-        bottomBarParent: BottomBarParents.pdf,
+        bottomBarParent: BottomBarParents.download,
         title: 'File Download',
         body: BlocBuilder<DownloadBloc, DownloadStates>(
           builder: (context, state) => Column(
