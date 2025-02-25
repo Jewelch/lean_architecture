@@ -1,8 +1,8 @@
 import 'dart:math';
 
 import '../../../../base/screens/exports.dart';
-import '../../common/entities/product.dart';
-import '../products_screen_deps.dart';
+import '../../common/domain_entities/product.dart';
+import '../binding/products_screen_deps.dart';
 import 'bloc/products_bloc.dart';
 import 'bloc/products_events.dart';
 import 'bloc/products_states.dart';

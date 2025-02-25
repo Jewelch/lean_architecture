@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-import '../../../common/entities/product.dart';
+import '../../../common/domain_entities/product.dart';
 
 sealed class ProductState extends Equatable {
   @override

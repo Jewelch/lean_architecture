@@ -5,6 +5,14 @@ class _UploadCompleted extends StatelessWidget {
 
   final UploadInfo info;
 
+  Future<void> _launchUrl() async {
+    final url = Uri.parse(info.location);
+    if (!(await canLaunchUrl(url))) {
+      throw Exception('Could not launch $url');
+    }
+    await launchUrl(url);
+  }
+
   @override
   Widget build(BuildContext context) => Column(
         mainAxisSize: MainAxisSize.min,
@@ -20,15 +28,28 @@ class _UploadCompleted extends StatelessWidget {
             spacing: 8,
             children: [
               Flexible(
-                child: SelectableText(
-                  info.location,
-                  style: AppStyles.indication.copyWith(color: Colors.grey),
+                child: GestureDetector(
+                  onTap: _launchUrl,
+                  child: Text(
+                    info.location,
+                    style: AppStyles.indication.copyWith(
+                      color: Colors.blue,
+                      decoration: TextDecoration.underline,
+                    ),
+                  ),
                 ),
               ),
               IconButton(
                 icon: const Icon(Icons.copy, size: 25),
                 onPressed: () => Clipboard.setData(ClipboardData(text: info.location)),
                 tooltip: 'Copy URL',
+                visualDensity: VisualDensity.compact,
+                padding: EdgeInsets.zero,
+              ),
+              IconButton(
+                icon: const Icon(Icons.open_in_browser, size: 25),
+                onPressed: _launchUrl,
+                tooltip: 'Open in browser',
                 visualDensity: VisualDensity.compact,
                 padding: EdgeInsets.zero,
               ),

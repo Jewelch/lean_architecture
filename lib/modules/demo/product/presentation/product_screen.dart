@@ -1,5 +1,5 @@
 import '../../../../../base/screens/exports.dart';
-import '../product_screen_deps.dart';
+import '../binding/product_screen_deps.dart';
 import 'bloc/product_bloc.dart';
 import 'bloc/product_events.dart';
 import 'bloc/product_states.dart';

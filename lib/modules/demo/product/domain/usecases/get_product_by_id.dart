@@ -1,8 +1,8 @@
 import 'package:lean_requester/lean_requester.dart';
 
-import '../../../common/entities/product.dart';
-import '../../../common/models/product_model.dart';
-import '../../data/datasource/product_datasource.dart';
+import '../../../common/data_models/product_model.dart';
+import '../../../common/domain_entities/product.dart';
+import '../../data/definition/product_datasource.dart';
 
 class GetProductByIdUC extends UseCase<Product, ProductModel, Product> {
   GetProductByIdUC(ProductDataSource dataSource)

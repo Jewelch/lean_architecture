@@ -1,4 +1,4 @@
-part of '../datasource/products_datasource.dart';
+part of '../implementation/products_datasource_impl.dart';
 
 const _productList = [
   {

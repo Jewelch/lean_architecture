@@ -1,4 +1,5 @@
 import 'package:flutter/services.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../base/screens/exports.dart';
 import '../../binding/upload_screen_deps.dart';
@@ -27,9 +28,7 @@ final class UploadScreen extends BlocProviderWidget<UploadBloc> {
             UploadProgressing() => _UploadProgressing<UploadBloc>(progress: state.progress),
             UploadFailed() => _UploadFailed<UploadBloc>(message: state.message),
             UploadCompleted() => _UploadCompleted(info: state.uploadInfo),
-            Idle() => const _UploadMessage(
-                message: 'Click the button below to select a file source\nand start uploading',
-              ),
+            Idle() => const _UploadMessage('Click the button below to select a file source\nand start uploading'),
           }
               .center(),
         ),

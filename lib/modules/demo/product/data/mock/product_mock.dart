@@ -1,4 +1,4 @@
-part of '../datasource/product_datasource.dart';
+part of '../implementation/product_datasource_impl.dart';
 
 const Map<String, dynamic> _mockProductData = {
   "id": 2,

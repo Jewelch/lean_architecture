@@ -1,7 +1,7 @@
 import 'package:lean_architecture/base/screens/exports.dart';
 import 'package:lean_requester/models_exp.dart';
 
-import '../models/product_model.dart';
+import '../data_models/product_model.dart';
 
 base class Product extends DTO {
   final String title;

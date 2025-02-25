@@ -1,5 +1,5 @@
 import '../../../../../base/bloc/exports.dart';
-import '../../../common/entities/product.dart';
+import '../../../common/domain_entities/product.dart';
 import '../../domain/usecases/get_products_uc.dart';
 import 'products_events.dart';
 import 'products_states.dart';

@@ -1,12 +1,8 @@
 import '../../../../../api/data_source.dart';
-import '../../../common/models/product_model.dart';
+import '../../../common/data_models/product_model.dart';
+import '../definition/products_datasource.dart';
 
 part '../mock/products_mock.dart';
-
-abstract interface class ProductsDataSource {
-  /// Calls the https://dummyjson.com/products endpoint.
-  DataSourceListResult<ProductModel> getProducts();
-}
 
 final class ProductsDataSourceImpl extends RestfulConsumer implements ProductsDataSource {
   ProductsDataSourceImpl({

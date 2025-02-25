@@ -1,8 +1,9 @@
-import '../../../app_injections.dart';
-import '../../../base/dependencies/dependencies.dart';
-import 'data/datasource/product_datasource.dart';
-import 'domain/usecases/get_product_by_id.dart';
-import 'presentation/bloc/product_bloc.dart';
+import '../../../../app_injections.dart';
+import '../../../../base/dependencies/dependencies.dart';
+import '../data/definition/product_datasource.dart';
+import '../data/implementation/product_datasource_impl.dart';
+import '../domain/usecases/get_product_by_id.dart';
+import '../presentation/bloc/product_bloc.dart';
 
 class ProductScreenDependencies implements Dependencies {
   @override
