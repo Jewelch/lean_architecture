@@ -21,7 +21,6 @@ final class UploadDataSourceImpl extends FileUploader implements UploadDataSourc
           filePath: filePath,
           onProgress: request.onProgress,
           cancelToken: request.cancelToken,
-          debugIt: true,
         ),
       );
 }
