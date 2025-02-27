@@ -4,7 +4,7 @@ import '../definition/product_datasource.dart';
 
 part '../mock/product_mock.dart';
 
-final class ProductDataSourceImpl extends RestfulConsumer implements ProductDataSource {
+final class ProductDataSourceImpl extends RestfulConsumerImpl implements ProductDataSource {
   ProductDataSourceImpl({
     required Dio client,
     required CacheManager cacheManager,

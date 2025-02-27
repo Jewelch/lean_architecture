@@ -44,9 +44,9 @@ class AppWidget extends StatelessWidget {
                   Expanded(
                     child: [
                       // DownloadScreen(),
-                      // UploadScreen(),
+                      UploadScreen(),
                       // ProductDetailsScreen(),
-                      // ProductDetailsScreen(),
+                      // ProductDetailsScreen(),y
                       ProductsScreen(),
                       // LocationScreen(),
                       // const ProfileScreen(),
