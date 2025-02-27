@@ -2,7 +2,7 @@ import '../../../../api/data_source.dart';
 import '../definition/upload_datasource.dart';
 import '../models/upload_response_model.dart';
 
-final class UploadDataSourceImpl extends FileUploader implements UploadDataSource {
+final class UploadDataSourceImpl extends FileUploaderImpl implements UploadDataSource {
   UploadDataSourceImpl({
     required Dio client,
     required CacheManager cacheManager,
@@ -14,7 +14,7 @@ final class UploadDataSourceImpl extends FileUploader implements UploadDataSourc
     FileOperationRequest request, {
     required String filePath,
   }) async =>
-      await executeRequest(
+      await upload(
         UploadConfiguration(
           responseModel: UploadResponseModel(),
           urlPath: '${UploadDataSource.uploadUrl}/files/upload',

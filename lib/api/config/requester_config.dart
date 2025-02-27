@@ -1,6 +1,6 @@
 part of '../data_source.dart';
 
-abstract base class _RequesterConfig extends LeanRequester {
+class _RequesterConfig extends LeanRequester {
   _RequesterConfig(
     super.dio,
     super.cacheManager,

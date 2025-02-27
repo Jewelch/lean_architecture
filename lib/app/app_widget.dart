@@ -44,8 +44,8 @@ class AppWidget extends StatelessWidget {
                   Expanded(
                     child: [
                       // DownloadScreen(),
-                      UploadScreen(),
-                      ProductDetailsScreen(),
+                      // UploadScreen(),
+                      // ProductDetailsScreen(),
                       // ProductDetailsScreen(),
                       ProductsScreen(),
                       // LocationScreen(),

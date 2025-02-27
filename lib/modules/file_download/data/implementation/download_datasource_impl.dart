@@ -6,7 +6,7 @@ import '../definition/download_datasouce.dart';
 
 export '../definition/download_datasouce.dart';
 
-final class DownloadDataSourceImpl extends FileDownloader implements DownloadDataSource {
+final class DownloadDataSourceImpl extends FileDownloaderImpl implements DownloadDataSource {
   DownloadDataSourceImpl({
     required Dio client,
     required CacheManager cacheManager,
@@ -18,7 +18,7 @@ final class DownloadDataSourceImpl extends FileDownloader implements DownloadDat
     FileOperationRequest request, {
     required PdfSize pdfSize,
   }) async =>
-      await executeRequest(
+      await download(
         DownloadConfiguration(
           urlPath: "${DownloadDataSource.pdfDownloadUrl}${pdfSize.size}MB",
           savePath: '${(await getApplicationDocumentsDirectory()).path}/sample_${pdfSize.label}.pdf',

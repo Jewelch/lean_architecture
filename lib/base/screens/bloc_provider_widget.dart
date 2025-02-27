@@ -121,7 +121,7 @@ class _State<T extends BlocProviderWidget, B extends BaseBloc> extends State<T> 
             );
             widget.onUpdate != null
                 ? widget.onUpdate!.call(context, state)
-                : Debugger.cyan(state.toString().split('(').first);
+                : Debugger.cyan('${widget.runtimeType} state: ${state.toString().split('(').first}');
           },
           child: widget.build(context),
         ),
