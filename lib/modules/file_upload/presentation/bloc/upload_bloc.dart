@@ -11,6 +11,7 @@ import 'events/upload_events.dart';
 import 'states/upload_states.dart';
 
 final class UploadBloc extends BaseBloc<UploadEvents, UploadStates> {
+  final imagePicker = image_picker.ImagePicker();
   final UploadFileUC _uploadFileUC;
   CancelToken? _cancelToken;
 
@@ -26,13 +27,13 @@ final class UploadBloc extends BaseBloc<UploadEvents, UploadStates> {
 
     switch (event.source) {
       case PickerSource.gallery:
-        final image = await image_picker.ImagePicker().pickImage(
+        final image = await imagePicker.pickImage(
           source: image_picker.ImageSource.gallery,
         );
         filePath = image?.path;
 
       case PickerSource.camera:
-        final image = await image_picker.ImagePicker().pickImage(
+        final image = await imagePicker.pickImage(
           source: image_picker.ImageSource.camera,
         );
         filePath = image?.path;

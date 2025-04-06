@@ -18,7 +18,7 @@ final class DownloadDataSourceImpl extends FileDownloaderImpl implements Downloa
     FileOperationRequest request, {
     required PdfSize pdfSize,
   }) async =>
-      await download(
+      download(
         DownloadConfiguration(
           urlPath: "${DownloadDataSource.pdfDownloadUrl}${pdfSize.size}MB",
           savePath: '${(await getApplicationDocumentsDirectory()).path}/sample_${pdfSize.label}.pdf',
